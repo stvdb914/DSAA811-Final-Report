@@ -1,0 +1,109 @@
+---
+title: 'Assignment 2 - Final Report'
+subtitle: 'Setting the environment'
+author: "Sharon Van Den Berg"
+date: "2025-03-24"
+
+knit: (function(input, encoding) {
+  rmarkdown::render(input,
+                    encoding = "UTF-8",
+                    output_dir = "../report",
+                    knit_root_dir = rprojroot::find_rstudio_root_file())})
+                    
+output: 
+  #html_document:
+  pdf_document:
+    includes:
+      in_header: 00_Globals.sty
+      before_body: 00_Title.sty
+      #after_body: tail.sty
+      toc: yes
+      keep_tex: yes
+      number_sections: yes
+geometry: margin= 2.00cm
+font-size: 11pt
+font-style: "Times New Roman"
+line-spacing: 1.5
+header-includes:
+  #Use the package setspace to use 1 and a half line spacing for readability
+  #Other option could be \doublespacing to have 2 lines between writing
+  - \usepackage{setspace}
+  - \onehalfspacing
+
+bibliography: DSAA811.bib
+link-citations: TRUE
+citation_package: apa-annotated.csl
+---
+
+[This report was made using R Markdown as a project linking to my Git account](https://github.com/stvdb914/DSAA811-Preliminary-Report "Git Repository")
+	
+```{r setup, include=FALSE}
+library(knitr)
+library(tinytex)
+library(tidyverse)
+opts_chunk$set(echo = TRUE)
+#Read in the 4 csv files
+athletes <- read.csv('./data/athlete_events_data_dictionary.csv', header = TRUE)
+events <- read.csv('./data/athlete_events.csv', header = TRUE)
+countryDefdd<- read.csv('./data/country_definitions_data_dictionary.csv',header = TRUE)
+countryDef <- read.csv('./data/country_definitions.csv',header = TRUE)
+glossaryDef <- data.frame(Acronym = character(), Meaning = character())
+glossaryDef <- add_row(glossaryDef, Acronym = "NOC", Meaning = "National Olympic Committee")
+```
+
+\newpage
+
+# Abstract
+```{r child = 'src/01_Abstract.Rmd'}
+```
+
+# Glossary
+```{r Glossary, include=TRUE}
+  as_tibble(glossaryDef)
+```
+
+```{=tex}
+  %Display the table of contents and bypass the R commands to do this
+  \newpage
+  \tableofcontents
+  \newpage
+```
+
+
+# Introduction
+
+```{r child = 'src/02_Introduction.Rmd'}
+```
+
+# Background
+```{r child = 'src/03_Background.Rmd'}
+```
+
+# Research questions and aims of the project
+```{r child = 'src/04_ResearchQuestions.Rmd'}
+```
+
+# Rationale
+```{r child = 'src/05_Rational.Rmd'}
+```
+
+# Data Description
+```{r child = 'src/06_DataDescription.Rmd'}
+```
+
+# Exploritory data analysis
+```{r child = 'src/07_Exploritory.Rmd'}
+```
+# Conclusion / Discussion
+```{r child = 'src/08_Conclude.Rmd'}
+```
+\newpage
+
+#Session Information
+
+```{r sessionInfo}
+sessionInfo()
+```
+
+\newpage
+# Bibliography
