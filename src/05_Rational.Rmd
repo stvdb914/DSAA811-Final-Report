@@ -11,18 +11,7 @@ output:
 ---
 
 
-```{r RationalSetup, include=FALSE}
-library(knitr)
-library(tinytex)
-library(tidyverse)
-opts_chunk$set(echo = TRUE)
-#Read in the 4 csv files
-athletes <- read.csv('./data/athlete_events_data_dictionary.csv', header = TRUE)
-events <- read.csv('./data/athlete_events.csv', header = TRUE)
-countryDefdd<- read.csv('./data/country_definitions_data_dictionary.csv',header = TRUE)
-countryDef <- read.csv('./data/country_definitions.csv',header = TRUE)
-glossaryDef <- data.frame(Acronym = character(), Meaning = character())
-glossaryDef <- add_row(glossaryDef, Acronym = "NOC", Meaning = "National Olympic Committee")
+```{r child = 'src/00_loader.Rmd', Include = TRUE, eval = FALSE}
 ```
 
 It is no real stretch to underestimate the importance of pride that can come from winning many medals at an Olympic games. From the eyes of the country the cost to participate can be exorbitant to send one athlete, let alone an entire team of athletes. The rational for this project is to maximize the number of medals that a country can win, whilst reducing the costs of sending athletes to perform on this stage. I am looking for the optimal number of competing athletes to maximize the gold. In order to look into this problem, we can use past results in order to predict the future. 

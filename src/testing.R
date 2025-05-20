@@ -1,12 +1,15 @@
-setwd("D:/OneDrives/OneDrive/University/2025 Autumn/DSAA811/Assignment/DSAA811-Preliminary-Report/data")
+setwd("D:/OneDrives/OneDrive/University/2025 Autumn/DSAA811/Assignment/DSAA811-Final-Report")
 
 library(tidyverse)
 library(sjmisc)
-athletes <- read.csv('athlete_events_data_dictionary.csv', header = TRUE)
-events <- read.csv('athlete_events.csv', header = TRUE)
-countryDefdd<- read.csv('country_definitions_data_dictionary.csv',header = TRUE)
-countryDef <- read.csv('country_definitions.csv',header = TRUE)
-head(athletes,15)
+athletes <- read.csv('./data/athlete_events_data_dictionary.csv', header = TRUE)
+events <- read.csv('./data/athlete_events.csv', header = TRUE)
+countryDefdd<- read.csv('./data/country_definitions_data_dictionary.csv', header = TRUE)
+countryDef <- read.csv('./data/country_definitions.csv', header = TRUE)
+head(athletes,10)
+head(events,10)
+head(countryDef, 10)
+head(countryDefdd,10)
 
 events %>% filter(Sport == "Gymnastics") %>%
   ggplot() +
@@ -98,7 +101,7 @@ lmdata <- Summer %>%
   pivot_wider(values_from = n, names_from = Sport)
 
 ggplot(lmdata) +
-  geom_line(aes(x = lmdata[,2,], y = Year))
+  geom_line(aes(x = lmdata[,2,], y = Year)) +
   theme_linedraw()
 
 lmdata[,2:37,]
@@ -107,3 +110,29 @@ lmdata[,2:37,]
 #5. A visualisation demonstrating the difference in means 
 #     (with confidence intervals) across different groups of people
 
+summerCounts
+summerCounts <- summerCounts[-1,]
+names(summerCounts) <- c("2004", "2008","2012", "2016")
+
+summerCounts <- tibble::rownames_to_column(summerCounts, "Sport")
+plsummerCounts <- summerCounts %>% pivot_longer(!Sport, names_to = "year", values_to = "count")
+
+ggplot(plsummerCounts, aes(x = year, y = count)) + 
+  geom_line(aes(color = Sport, group = Sport)) +
+  facet_wrap(~Sport)
+
+summerCounts
+
+summerCounts2 <- Summer %>%  
+  group_by (Team, Year) %>%
+  count(Sport)
+
+summerCounts2 <- Summer %>%  filter(Team == "Australia" | Team == "United States") %>%
+  filter( Sport >= "Swimming") %>%
+  group_by (Team, Year) %>%
+  count(Sport)
+
+
+ggplot(summerCounts2, aes(x = Year, y = n)) + 
+  geom_line(aes(color = Team, linetype = Team)) +
+  facet_grid(vars(Sport)) + theme(legend.position="none")

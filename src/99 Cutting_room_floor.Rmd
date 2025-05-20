@@ -1,0 +1,56 @@
+---
+title: "06_DataDescription"
+knit: (function(input, encoding) {
+  rmarkdown::render(input,
+                    encoding = "UTF-8",
+                    output_dir = "../html",
+                    knit_root_dir = rprojroot::find_rstudio_root_file())})
+output:
+  pdf_document
+  
+editor_options: 
+  chunk_output_type: console
+bibliography: DSAA811.bib
+link-citations: TRUE
+citation_package: apa-annotated.csl
+---
+
+```{r child = 'src/00_loader.Rmd', Include = TRUE, eval = FALSE}
+```
+
+```{r mapplaying, fig.align = 'center', warning = FALSE, echo = FALSE}
+
+drawMap("", "Every athlete locations")
+
+drawMap("Winter", "Location of the winter athletes")
+```
+
+```{r SummerPlayers, fig.align = 'center', warning = FALSE, echo = FALSE}
+
+drawMap("Summer", "Location of the summer athletes")
+
+```
+
+```{r summerTables, warning = FALSE, echo = FALSE}
+summer1 <- MedalWinners("Summer", 1896)
+summer2 <- MedalWinners("Summer", 2016)
+
+list(summer1,summer2) %>% 
+  knitr::kable("latex", position = "H",  booktabs = T, caption = "Summer Sport Total Medals won",
+         label = "SummerWinners") %>%  
+         kable_styling(latex_options = "striped")
+```
+\newpage
+
+```{r winterTables, warning=FALSE, echo=FALSE}
+
+winter1 <- MedalWinners("Winter", 1924, "float_left")
+winter2 <- MedalWinners("Winter", 2014, "float_right")
+
+list(winter1,winter2) %>% 
+  knitr::kable("latex", position = "H",  booktabs = T, caption = "Winter Sport Total Medals won",
+         label = "WinterWinners") %>%  
+         kable_styling(latex_options = "striped")
+```
+
+\newpage

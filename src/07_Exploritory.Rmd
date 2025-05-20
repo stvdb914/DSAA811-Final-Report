@@ -11,24 +11,12 @@ output:
 ---
 
 
-```{r ExploritorySetup, include=FALSE}
-library(knitr)
-library(tinytex)
-library(tidyverse)
-library(sjmisc)
-opts_chunk$set(echo = TRUE)
-#Read in the 4 csv files
-athletes <- read.csv('./data/athlete_events_data_dictionary.csv', header = TRUE)
-events <- read.csv('./data/athlete_events.csv', header = TRUE)
-countryDefdd<- read.csv('./data/country_definitions_data_dictionary.csv',header = TRUE)
-countryDef <- read.csv('./data/country_definitions.csv',header = TRUE)
-glossaryDef <- data.frame(Acronym = character(), Meaning = character())
-glossaryDef <- add_row(glossaryDef, Acronym = "NOC", Meaning = "National Olympic Committee")
+```{r child = 'src/00_loader.Rmd', Include = TRUE, eval = FALSE}
 ```
 
 The first thing we should do with the datasets is to load them into r using  the following code.
 
-```{r Load, include=TRUE}
+```{r Load, echo = TRUE, eval = FALSE}
 #Read in the 4 csv files
 athletes <- read.csv('./data/athlete_events_data_dictionary.csv', 
                      header = TRUE)

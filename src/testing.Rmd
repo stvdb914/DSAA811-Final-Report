@@ -1,6 +1,6 @@
 ---
 title: "testing"
-output: html_document
+output: pdf_document
 ---
 
 ```{r week6, include=TRUE, fig.dim=5}

@@ -1,54 +1,77 @@
 ---
-title: 'Assignment 2 - Final Report'
+title: 'Assignment 3 - Final Report'
 subtitle: 'Setting the environment'
-author: "Sharon Van Den Berg"
-date: "2025-03-24"
-
+author: 
+  - Sharon Van Den Berg 9251936 (stvdb914@uowmail.edu.au) 
+  - School of Mathematics and Applied Statistics
+date: "`r format(Sys.time(), '%d %B, %Y \n')`"
 knit: (function(input, encoding) {
   rmarkdown::render(input,
                     encoding = "UTF-8",
                     output_dir = "../report",
-                    knit_root_dir = rprojroot::find_rstudio_root_file())})
                     
+                    knit_root_dir = rprojroot::find_rstudio_root_file())})
+
 output: 
   #html_document:
-  pdf_document:
-    includes:
-      in_header: 00_Globals.sty
-      before_body: 00_Title.sty
-      #after_body: tail.sty
-      toc: yes
-      keep_tex: yes
-      number_sections: yes
+  bookdown::pdf_document2: 
+     keep_tex: true
+     number_sections: true
+     toc: false
 geometry: margin= 2.00cm
 font-size: 11pt
-font-style: "Times New Roman"
+font-style: "Serif"
 line-spacing: 1.5
 header-includes:
-  #Use the package setspace to use 1 and a half line spacing for readability
-  #Other option could be \doublespacing to have 2 lines between writing
+  - \usepackage{titling}
+  - \pretitle{\begin{center}
+    \includegraphics[width=6in,height=5in]{../images/UOW.png}\LARGE\\}
+  - \posttitle{\end{center}}
   - \usepackage{setspace}
   - \onehalfspacing
-
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \lhead{\fontsize{11pt}{11pt}\selectfont "Times New Roman"}
+  - \fancyhead[L]{\fontsize{11}{11}\selectfont STAT950/STAT250 ASSESSMENT 03 - Sharon Van Den Berg 9251936}
+  - \fancyhead[R]{}
+  - \lfoot{\fontsize{11pt}{11pt}\selectfont "Serif"}
+  - \fancyfoot[C]{\thepage}
+  - \fancyfoot[L]{}
+  - \usepackage{pdflscape}
+  - \newcommand{\blandscape}{\begin{landscape}}
+  - \newcommand{\elandscape}{\end{landscape}}
+documentclass: article
+editor_options: 
+  chunk_output_type: console
 bibliography: DSAA811.bib
 link-citations: TRUE
 citation_package: apa-annotated.csl
 ---
 
-[This report was made using R Markdown as a project linking to my Git account](https://github.com/stvdb914/DSAA811-Preliminary-Report "Git Repository")
-	
-```{r setup, include=FALSE}
-library(knitr)
-library(tinytex)
-library(tidyverse)
-opts_chunk$set(echo = TRUE)
-#Read in the 4 csv files
-athletes <- read.csv('./data/athlete_events_data_dictionary.csv', header = TRUE)
-events <- read.csv('./data/athlete_events.csv', header = TRUE)
-countryDefdd<- read.csv('./data/country_definitions_data_dictionary.csv',header = TRUE)
-countryDef <- read.csv('./data/country_definitions.csv',header = TRUE)
-glossaryDef <- data.frame(Acronym = character(), Meaning = character())
-glossaryDef <- add_row(glossaryDef, Acronym = "NOC", Meaning = "National Olympic Committee")
+**DECLARATION**
+	No part of this Assignment has been copied from anyone else, and I have not lent any part of it to anyone else. No part of this assignment has been written by generative AI.
+
+```{=tex}
+	\vspace*{2em}\noindent
+	\hfill%
+	\begin{tabular}[t]{c}
+		\includegraphics[width=3cm]{../images/Sharon.png} \\
+		\rule{10em}{0.5pt}\\ Sharon Van Den Berg (9251936)
+	\end{tabular}%
+	\hfill%
+	\begin{tabular}[t]{c}
+		\today \\
+		\rule{10em}{0.4pt}\\ Date
+	\end{tabular}
+```
+
+[This report was made using R Markdown as a project linking to my Git account](https://github.com/stvdb914/DSAA811-Final-Report "Git Repository")
+
+\newpage
+\tableofcontents
+\newpage
+
+```{r child = 'src/00_loader.Rmd' , eval = TRUE}
 ```
 
 \newpage
@@ -58,17 +81,17 @@ glossaryDef <- add_row(glossaryDef, Acronym = "NOC", Meaning = "National Olympic
 ```
 
 # Glossary
-```{r Glossary, include=TRUE}
-  as_tibble(glossaryDef)
+```{r Glossary, include = TRUE, echo = FALSE}
+  options(knitr.kable.NA = '')
+
+    glossaryDef %>% 
+    knitr::kable("pipe", 
+                 booktabs = TRUE) %>% 
+    kable_styling(latex_options = "striped", position = "left") %>% 
+      column_spec(1, bold = TRUE)
 ```
 
-```{=tex}
-  %Display the table of contents and bypass the R commands to do this
-  \newpage
-  \tableofcontents
-  \newpage
-```
-
+\newpage
 
 # Introduction
 
