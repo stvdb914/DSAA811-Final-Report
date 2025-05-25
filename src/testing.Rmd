@@ -4,11 +4,12 @@ output: pdf_document
 ---
 
 ```{r week6, include=TRUE, fig.dim=5}
-
-athletes <- read.csv('./data/athlete_events_data_dictionary.csv', header = TRUE)
-events <- read.csv('./data/athlete_events.csv', header = TRUE)
-countryDefdd<- read.csv('./data/country_definitions_data_dictionary.csv', header = TRUE)
-countryDef <- read.csv('./data/country_definitions.csv', header = TRUE)
+#This is in here because it was part of the week 6 lab work
+#I use it to test some things before adding to the report
+athletes <- read.csv('../data/athlete_events_data_dictionary.csv', header = TRUE)
+events <- read.csv('../data/athlete_events.csv', header = TRUE)
+countryDefdd<- read.csv('../data/country_definitions_data_dictionary.csv', header = TRUE)
+countryDef <- read.csv('../data/country_definitions.csv', header = TRUE)
 head(athletes,10)
 head(events,10)
 head(countryDef, 10)
@@ -29,6 +30,11 @@ events  %>% filter(Year == 2016) %>%
   geom_bar(aes(y = Sport), stat="count") +
   labs(title = 'Number of athletes per sport in 2016') +
   theme_minimal(22)
+```
 
-  
+```{r testme}
+events %>% filter(!is.na(Medal) & Year == 2000) %>% select(NOC, Year, Sport, Medal) %>% 
+  group_by(NOC, Year, Medal) %>% summarise(mynumber = n()) %>%
+  arrange(desc(mynumber)) %>% 
+  pivot_wider(names_from = Medal, values_from = mynumber) 
 ```

@@ -31,26 +31,6 @@ drawMap("Summer", "Location of the summer athletes")
 
 ```
 
-```{r summerTables, warning = FALSE, echo = FALSE}
-summer1 <- MedalWinners("Summer", 1896)
-summer2 <- MedalWinners("Summer", 2016)
 
-list(summer1,summer2) %>% 
-  knitr::kable("latex", position = "H",  booktabs = T, caption = "Summer Sport Total Medals won",
-         label = "SummerWinners") %>%  
-         kable_styling(latex_options = "striped")
-```
-\newpage
-
-```{r winterTables, warning=FALSE, echo=FALSE}
-
-winter1 <- MedalWinners("Winter", 1924, "float_left")
-winter2 <- MedalWinners("Winter", 2014, "float_right")
-
-list(winter1,winter2) %>% 
-  knitr::kable("latex", position = "H",  booktabs = T, caption = "Winter Sport Total Medals won",
-         label = "WinterWinners") %>%  
-         kable_styling(latex_options = "striped")
-```
 
 \newpage

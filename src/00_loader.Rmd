@@ -36,6 +36,7 @@ library(magrittr)
 
 ```{r, include=FALSE}
 options(tinytex.verbose = TRUE)
+source("./src/functions.R", local = knitr::knit_global())
 ```
 
 ```{r dataWrangler, include = TRUE, echo = FALSE}
@@ -45,6 +46,21 @@ events <- read.csv('./data/athlete_events.csv', header = TRUE)
 countryDefdd <- read.csv('./data/country_definitions_data_dictionary.csv',header = TRUE)
 countryDef <- read.csv('./data/country_definitions.csv',header = TRUE)
 locations <- read.csv('./data/country-coord.csv', header = TRUE)
+
+events$Sex <- factor(events$Sex,
+                     levels = c("M", "F"),
+                     labels = c("Male", "Female"))
+
+events$NOC <- as.factor(events$NOC)
+
+events$Season <- factor(events$Season,
+                        levels = c("Summer", "Winter"),
+                        labels = c("Summer", "Winter"))
+
+events$Medal <- factor(events$Medal,
+                          levels = c("Gold", "Silver", "Bronze"),
+                          labels = c("Gold", "Silver", "Bronze"),
+                          ordered = TRUE)
 ```
 
 ```{r glossaryMaker, include = TRUE, echo = FALSE}
@@ -53,56 +69,3 @@ glossaryDef <- add_row(glossaryDef, Acronym = "DUMMY", Definition = "Testing to 
 glossaryDef <- add_row(glossaryDef, Acronym = "NOC", Definition = "National Olympic Committee")
 ```
 
-```{r functionMaps, include = TRUE, echo = FALSE}
-drawMap <- function(strSeason, olympicCaption){
-
-  # Plot the information regarding all the athletes on the map
-  
-  locations_df <- events %>% 
-    distinct(NOC, Season) %>% 
-    full_join(locations, by = join_by(NOC == Alpha.3.code)) %>% 
-    filter((grepl(strSeason,Season)) & !is.na(Country))  %>% 
-    select(region = Country, lat = Latitude..average., long = Longitude..average.)
-
-
-  world_map <- map_data("world")
-
-  # Add locations to the plot
-  ggplot() +
-    geom_map(
-      data = world_map,
-      map = world_map,
-      aes(map_id = region),
-      color = "black",
-      fill = "lightgrey",
-      linewidth = 0.5
-    ) +
-    theme_void() +
-    geom_point(
-      data = locations_df,
-      aes(x = long, y = lat, color = region),
-      size = 3,
-      shape = 20
-    ) +
-    theme(panel.background = element_rect(fill = "lightblue"),
-          panel.grid = element_blank()) +
-    scale_color_discrete(name = "Locations") +
-    labs(title = olympicCaption) +
-    theme(legend.position = "none")
-  }
-```
-
-```{r functionGoldtable, include = TRUE, warnings = FALSE, echo = FALSE}
-MedalWinners <- function(strSeason, nYear, inPos) {
- events %>% 
-    filter(grepl(strSeason,Season) & !is.na(Medal) & Year == nYear) %>% 
-    select(Games, Year, Sport, Event, Medal) %>% 
-   group_by(Sport) %>% 
-   summarize(Medals_Given = n()) 
-  #%>% 
-  # knitr::kable("latex", position = "H",  booktabs = T,
-  #           caption = "Medals won",
-  #           label = "Winners") %>%  
-  #  kable_styling(latex_options = "striped", position = inPos)
-}
-```

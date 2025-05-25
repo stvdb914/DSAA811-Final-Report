@@ -6,10 +6,23 @@ athletes <- read.csv('./data/athlete_events_data_dictionary.csv', header = TRUE)
 events <- read.csv('./data/athlete_events.csv', header = TRUE)
 countryDefdd<- read.csv('./data/country_definitions_data_dictionary.csv', header = TRUE)
 countryDef <- read.csv('./data/country_definitions.csv', header = TRUE)
+events$Medal <- factor(events$Medal,
+                       levels = c("Gold", "Silver", "Bronze"),
+                       labels = c("Gold", "Silver", "Bronze"),
+                       ordered = TRUE)
 head(athletes,10)
 head(events,10)
 head(countryDef, 10)
 head(countryDefdd,10)
+
+#This one tells you how many medals each person won
+myMini <- events %>%  filter(Year == 1896) %>% 
+  select(ID, NOC, Year, Season, Medal) %>% 
+  pivot_wider(names_from = Medal,
+              values_from = Medal,
+              values_fill = 0,
+              values_fn = list(Medal = length),
+              ) 
 
 events %>% filter(Sport == "Gymnastics") %>%
   ggplot() +
@@ -136,3 +149,19 @@ summerCounts2 <- Summer %>%  filter(Team == "Australia" | Team == "United States
 ggplot(summerCounts2, aes(x = Year, y = n)) + 
   geom_line(aes(color = Team, linetype = Team)) +
   facet_grid(vars(Sport)) + theme(legend.position="none")
+
+
+Gold <- events %>% 
+    filter(grepl("Summer",Season) & Medal == "Gold" & Year == 1896) %>% 
+    select(Games, Year, Sport, Event, Medal) %>% 
+    group_by(Sport) %>% 
+    summarize(Medals_Given = n()) 
+
+Silver1 <- events %>% 
+  filter(grepl("Summer",Season) & !is.na(Medal) & Year == 1896) %>% 
+  select(Games, Year, Sport, Event, Medal) %>% 
+  group_by(Sport, Medal) %>% 
+  summarize(Medals_Given = n()) %>% 
+  pivot_wider(names_from = Medal, values_from = Medals_Given)
+
+

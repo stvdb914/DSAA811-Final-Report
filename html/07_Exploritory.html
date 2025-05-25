@@ -366,44 +366,8 @@ countryDef &lt;- read.csv(&#39;./data/country_definitions.csv&#39;,
                        header = TRUE)
 
 #Get a summary view of the data
-summary(athletes)</code></pre>
-<pre><code>##     Field           Description       
-##  Length:15          Length:15         
-##  Class :character   Class :character  
-##  Mode  :character   Mode  :character</code></pre>
-<pre class="r"><code>summary(events)</code></pre>
-<pre><code>##        ID             Name               Sex                 Age       
-##  Min.   :     1   Length:271116      Length:271116      Min.   :10.00  
-##  1st Qu.: 34643   Class :character   Class :character   1st Qu.:21.00  
-##  Median : 68205   Mode  :character   Mode  :character   Median :24.00  
-##  Mean   : 68249                                         Mean   :25.56  
-##  3rd Qu.:102097                                         3rd Qu.:28.00  
-##  Max.   :135571                                         Max.   :97.00  
-##                                                         NA&#39;s   :9474   
-##      Height          Weight          Team               NOC           
-##  Min.   :127.0   Min.   : 25.0   Length:271116      Length:271116     
-##  1st Qu.:168.0   1st Qu.: 60.0   Class :character   Class :character  
-##  Median :175.0   Median : 70.0   Mode  :character   Mode  :character  
-##  Mean   :175.3   Mean   : 70.7                                        
-##  3rd Qu.:183.0   3rd Qu.: 79.0                                        
-##  Max.   :226.0   Max.   :214.0                                        
-##  NA&#39;s   :60171   NA&#39;s   :62875                                        
-##     Games                Year         Season              City          
-##  Length:271116      Min.   :1896   Length:271116      Length:271116     
-##  Class :character   1st Qu.:1960   Class :character   Class :character  
-##  Mode  :character   Median :1988   Mode  :character   Mode  :character  
-##                     Mean   :1978                                        
-##                     3rd Qu.:2002                                        
-##                     Max.   :2016                                        
-##                                                                         
-##     Sport              Event              Medal          
-##  Length:271116      Length:271116      Length:271116     
-##  Class :character   Class :character   Class :character  
-##  Mode  :character   Mode  :character   Mode  :character  
-##                                                          
-##                                                          
-##                                                          
-## </code></pre>
+summary(athletes)
+summary(events)</code></pre>
 <p>The athletes table is the meta data for the events table. There is a
 lot of missing data in the events table for height and weight of the
 athletes. NOC, sex, and year are categorical variables and have been

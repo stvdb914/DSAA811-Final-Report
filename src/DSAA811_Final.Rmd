@@ -11,7 +11,6 @@ knit: (function(input, encoding) {
                     output_dir = "../report",
                     
                     knit_root_dir = rprojroot::find_rstudio_root_file())})
-
 output: 
   #html_document:
   bookdown::pdf_document2: 
