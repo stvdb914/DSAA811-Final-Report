@@ -30,7 +30,7 @@ The "athlete_events.csv" file contains all athlete information of all the Olympi
     kable_styling(latex_options = "HOLD_position", full_width = F)
 ```
 
-The research will center around the NOC, Season, Year, Sport and Medals. I am trying to work out if sending more athletes equates to more medals. If I can isolate what year there is differences in the medal tally for some countries we can pinpoint what if anything was occurring in that country at the time. This may give insight to the specific number of athletes required to send to the games to capitalize on medals.
+The research will center around the ID, NOC, Season, Year, Sport and Medals. I am trying to work out if sending more athletes equates to more medals. If I can isolate what year there is differences in the medal tally for some countries we can pinpoint what if anything was occurring in that country at the time. This may give insight to the specific number of athletes required to send to the games to capitalize on medals.
 
 In the athletes table there is a field called NOC which is the National Olympic City code that links to the country definitions that will allow for better groupings of data by country when linked to each other.
 
@@ -39,3 +39,7 @@ To represent the data on a world map I needed to obtain another data set of data
 ```{r OlympicAll, fig.asp = 0.8, fig.show="hold", fig.cap="Mapping the NOC codes to longitude and latitude points on the world map", echo = FALSE}
   drawMap("", "All Countries that have competed at an olympic games")
 ```
+
+Whilst working with this data set, and considering the questions that are being asked. The categories that are most relevant in this data set are all categorical variables, that are quantified with counts to extrapolate unique athlete ID's, or Team members, to counts of medals in all categories, gold, silver, bronze or no medal awarded. For this reason I have factored all the categorical data for ease of use.
+
+In the next section I take a look at some of the tables and figures that can answer the questions that arose in Research Questions which will guide any conclusions that I come up with to answer them.

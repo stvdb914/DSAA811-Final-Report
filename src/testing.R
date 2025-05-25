@@ -16,6 +16,7 @@ head(countryDef, 10)
 head(countryDefdd,10)
 
 #This one tells you how many medals each person won
+#This is important because there are athletes that win multiple medals
 myMini <- events %>%  filter(Year == 1896) %>% 
   select(ID, NOC, Year, Season, Medal) %>% 
   pivot_wider(names_from = Medal,
@@ -24,11 +25,17 @@ myMini <- events %>%  filter(Year == 1896) %>%
               values_fn = list(Medal = length),
               ) 
 
+#This is looking at weight and height of athletes in one sport dimension
+#I want to focus more on the categorical data
 events %>% filter(Sport == "Gymnastics") %>%
   ggplot() +
   geom_point(aes(x = Age, y = Weight)) +
   labs(title = 'Olympic gymnasts ages and weights') +
   theme_bw()
+
+
+#This is not taking into consideration the number of athletes this is just the events
+#per sport
 
 events  %>% filter(Year == 2016) %>%
   ggplot() +
@@ -36,16 +43,7 @@ events  %>% filter(Year == 2016) %>%
   labs(title = 'Number of athletes per sport in 2016') +
   theme_minimal(12)
 
-
-events %>% filter ((Year == 2012) | (Year == 2016)) %>%
-  ggplot() +
-  geom_bar(aes(y = Sport), stat="count") +
-  labs(title = 'Number of athletes per sport in 2016') +
-  theme_minimal(12) +
-  facet_wrap(events$Year)
-
-options(max.print=1000000)
-
+#Similar to the above. Only counting the events in 2000
 events %>% filter (Year == 2000) %>%
   ggplot() +
   geom_bar(aes(y = Sport), stat="count") +
@@ -58,16 +56,6 @@ events$Sex <- factor(events$Sex,
                      levels = c("M","F"),
                      labels = c("M","F"))
 
-
-events %>% filter (Year >= 2000) %>%
-  ggplot() +
-  geom_bar(aes(y = Sport), stat="count") +
-  labs(title = 'Number of athletes per sport in 2000') + theme_bw() +
-  facet_wrap(vars(events$Year >= 2000))
-
-
-
-
 #Within your exploratory analysis include:
 #1. A visualisation of an amount or frequency over two qualitative variables.
 
@@ -77,6 +65,7 @@ events  %>% filter(Year == 2016) %>%
   labs(title = 'Number of athletes per sport in 2016') +
   theme_minimal(12)
 
+#Shows the change in the number of events per sport at the olympics
 Summer <- events %>% filter (Season == "Summer") %>% filter (Year > 2000)
 Summer %>% 
   ggplot(aes(width=60, height=100)) +
@@ -106,6 +95,8 @@ events %>% filter(Sport == "Gymnastics") %>%
   theme_bw()
 
 #3. A visualisation demonstrating a trend or relationship in the data.
+
+Year = 1896
 
 lmdata <- Summer %>%  
   group_by (Year) %>%

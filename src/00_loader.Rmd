@@ -65,7 +65,6 @@ events$Medal <- factor(events$Medal,
 
 ```{r glossaryMaker, include = TRUE, echo = FALSE}
 glossaryDef <- data.frame(Acronym = character(), Definition = character())
-glossaryDef <- add_row(glossaryDef, Acronym = "DUMMY", Definition = "Testing to see if two rows ccan be printed")
 glossaryDef <- add_row(glossaryDef, Acronym = "NOC", Definition = "National Olympic Committee")
 ```
 

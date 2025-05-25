@@ -66,20 +66,18 @@ citation_package: apa-annotated.csl
 
 [This report was made using R Markdown as a project linking to my Git account](https://github.com/stvdb914/DSAA811-Final-Report "Git Repository")
 
-\newpage
-\tableofcontents
-\newpage
-
 ```{r child = 'src/00_loader.Rmd' , eval = TRUE}
 ```
 
 \newpage
-
-# Abstract
+# Abstract {-}
 ```{r child = 'src/01_Abstract.Rmd'}
 ```
 
-# Glossary
+\newpage
+\tableofcontents
+
+# Glossary {-}
 ```{r Glossary, include = TRUE, echo = FALSE}
   options(knitr.kable.NA = '')
 
@@ -91,41 +89,45 @@ citation_package: apa-annotated.csl
 ```
 
 \newpage
-
-# Introduction
+# Introduction {-}
 
 ```{r child = 'src/02_Introduction.Rmd'}
 ```
 
-# Background
+\newpage
+# Background {-}
 ```{r child = 'src/03_Background.Rmd'}
 ```
 
-# Research questions and aims of the project
+\newpage
+# Research questions and aims of the project {-}
 ```{r child = 'src/04_ResearchQuestions.Rmd'}
 ```
 
-# Rationale
+# Rationale {-}
 ```{r child = 'src/05_Rational.Rmd'}
 ```
 
-# Data Description
+\newpage
+# Data Description {-}
 ```{r child = 'src/06_DataDescription.Rmd'}
 ```
 
-# Exploritory data analysis
+\newpage
+# Exploritory data analysis {-}
 ```{r child = 'src/07_Exploritory.Rmd'}
 ```
-# Conclusion / Discussion
+
+\newpage
+# Conclusion / Discussion {-}
 ```{r child = 'src/08_Conclude.Rmd'}
 ```
+
 \newpage
-
-#Session Information
-
+#Session Information {-}
 ```{r sessionInfo}
 sessionInfo()
 ```
 
 \newpage
-# Bibliography
+# Bibliography {-}

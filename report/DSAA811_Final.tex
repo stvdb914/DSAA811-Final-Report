@@ -187,7 +187,7 @@
 \makeatother
 \subtitle{Setting the environment}
 \author{Sharon Van Den Berg 9251936 (\href{mailto:stvdb914@uowmail.edu.au}{\nolinkurl{stvdb914@uowmail.edu.au}}) \and School of Mathematics and Applied Statistics}
-\date{24 May, 2025}
+\date{26 May, 2025}
 
 \begin{document}
 \maketitle
@@ -210,66 +210,90 @@ No part of this Assignment has been copied from anyone else, and I have not lent
 \href{https://github.com/stvdb914/DSAA811-Final-Report}{This report was made using R Markdown as a project linking to my Git account}
 
 \newpage
+
+\section*{Abstract}\label{abstract}
+\addcontentsline{toc}{section}{Abstract}
+
+Since the inception of the Olympic games in 1896 humans have been on a pursuit to push their minds bodies and souls to become the best of the best. They inspire the next generation to have pride not only in themselves but in their Country.
+
+In its inception there were a small subset of sports that the competition would occur and these can be found on the left side of Table \ref{tab:SummerWinners}. Over the years the competition occurred every four years with more nations appearing and a more diverse range of sports being included. With that there are more opportunities for athletes to compete for the glory of a medal.
+
+As a nation, it would be nice to consider a balance where a small number of athletes could be sent whilst maximizing the haul of Olympic medals.
+
+This report aims to look at some of the past results of the games in terms of events and medals to determine if there is any clear evidence to support reducing the number of athletes, but maintaining or improving the number of medals that can be procured.
+
+\newpage
 \tableofcontents
-\newpage
 
-\newpage
-
-\section{Abstract}\label{abstract}
-
-\begin{itemize}
-\tightlist
-\item
-  For now, just a heading for this section
-\end{itemize}
-
-\section{Glossary}\label{glossary}
+\section*{Glossary}\label{glossary}
+\addcontentsline{toc}{section}{Glossary}
 
 \begin{longtable}[l]{>{}ll}
 \toprule
 Acronym & Definition\\
 \midrule
-\textbf{\cellcolor{gray!10}{DUMMY}} & \cellcolor{gray!10}{Testing to see if two rows ccan be printed}\\
-\textbf{NOC} & National Olympic Committee\\
+\textbf{\cellcolor{gray!10}{NOC}} & \cellcolor{gray!10}{National Olympic Committee}\\
 \bottomrule
 \end{longtable}
 
 \newpage
 
-\section{Introduction}\label{introduction}
+\section*{Introduction}\label{introduction}
+\addcontentsline{toc}{section}{Introduction}
 
-\begin{itemize}
-\tightlist
-\item
-  For now, just a heading for this section
-\end{itemize}
+\newpage
 
-\section{Background}\label{background}
+\section*{Background}\label{background}
+\addcontentsline{toc}{section}{Background}
 
-I have been looking into some articles regarding the statistics around reducing the number of athletes that a country can send to the Olympics to procure the maximum medals. The following three articles are of interest, and depending on the information, I can extract from my dataset. One of these avenues will become the focus element for this report.
+The Olympic games was first held in Athens in 1896, with 241 athletes and 14 nations. They participated in 43 events. These events were inspired from the ancient Olympic games that were held in Greece from 8th century BC to the 4th century AD (\citeproc{ref-a2020_olympic}{History and Heritage 2020}). The list of the events for this Olympics appears in Table \ref{tab:SummerWinners}. These Olympics become known as the Summer Olympic Games.
 
-(\citeproc{ref-haut_2014_nothing}{Haut, Prohl, and Emrich 2014}) examines the statistics of the Olympics but also investigates the data from the perspective of increasing funds to rural areas to enhance performance and ultimately achieve more winners. At this stage I don't think that this report will be useful, however there is some regional information in my data set that I can use to plot the locations of the athletes on a world map.
+In 1921, the decision was made to make a Winter Olympic games to cater for snow and ice sports. The data set that I obtained contains data from the 1924 Winter Olympic Games and the list of these sports can be found in Table \ref{tab:WinterWinners}.
 
-(\citeproc{ref-condon_1999_predicting}{Condon, Golden, and Wasil 1999}) Uses neural networks to produce three models that look at winners from a country perspective using data up until 1996. If I can get the same results, my data set continues to 2016, so this avenue would allow me to extend their findings on the years post 1996 to 2016.
+(\citeproc{ref-OxfordStudy}{Flyvbjerg, Stewart, and Budzier 2016}) and their 2016 Olympic Study found on average it costs approx 5.2 billion US to host a Summer Olympics and 3.1 billion US to host the Winter Olympic games. This figure did not include upgrades and improvements to the hosts major infrastructure such as airports and highways.
 
-(\citeproc{ref-heazlewood_2006_prediction}{Heazlewood 2006}) Looks into creating models to predict the optimal athlete numbers for all swimming events. This article was able to make some of these predictions, but improvements are needed to apply these results to athletics and swimming across the various distances of the races. These models are applied to results from 2004 and earlier. This article is of particular interest because of the break down of athletes into sections, mainly swimming. It could be useful to attempt to extend their results to apply it to other sports, such as athletics in summer or cross country skiing in winter.
+Further costs are incurred for the opening and closing ceremonies, and medal presentations. There are three types of medals, Gold for first place, Silver for second and Bronze for third place winners. These medals are regarded as highly prestigious and brings great pride to the athlete and the host nation when they possess them.
 
-Some of the terminology that I have come across is NOC or National Olympic Committee. Each country has a member that is on the committee and they are responsible for that country. Every athlete must compete under their NOC. I can used this NOC to get a general location of the athletes home town when comparing countries for athlete levels.
+Every athlete that competes in these games must belong to a host nation. These nations are managed by a National Olympic Committee (NOC). This body ensures that the games are run in the interest of fairness and good sportsmanship by all countries. This can be by way of sport rules and education for all involved. It is this body that is responsible for nominating their candidates interest in hosting the future games {[}a2025\_what{]}.
 
-\section{Research questions and aims of the project}\label{research-questions-and-aims-of-the-project}
+Due to the size of the events, they bring in many competitors and fans for the spectacle. This in turn raises the cost of travel to the host nations during the competition window. It is these costs that the non-host nation wish to minimize whilst still able to procure the most medals possible. This is the problem that this paper is looking to assist with.
 
-As this is in the early stages of investigation, I still have too many questions to look into.
+(\citeproc{ref-heazlewood_2006_prediction}{Heazlewood 2006}) has some analysis regarding models to predict the optimal athlete numbers for all swimming events. This article was able to make some of these predictions, but improvements are needed to apply these results to athletics and swimming across the various distances of the races. These models are applied to results from 2004 and earlier. This article is of particular interest because of the break down of athletes into sections, mainly swimming. It could be useful to attempt to extend their results to apply it to other sports, such as athletics in summer or cross country skiing in winter. Whilst this is similar to my investigations, I feel it is at a deeper level and more specific to swimming only. I try and stay across all sports, looking for trends and medals to proportion of athletes sent to the games. I also investigate the trends with changes in the numbers of athletes sent for a particular sport.
 
-I can look at athletes, per winter or summer games, per country that the athlete competes at, or per NOC. I can even split the data into per sport. At the end of the day I want to answer, what is the minimal number of athletes that my country should send to the games to receive the most medals based on previous summer and winter Olympic data.
+Now that we have obtained a data set we take a look at some questions that will guide the exploration of this data.
 
-My plan moving forward is to play with the data set some more to see if I can marry the results of prior written research so I can stand on the giants of the past to push the research in this area forward in the future.
+\newpage
 
-\section{Rationale}\label{rationale}
+\section*{Research questions and aims of the project}\label{research-questions-and-aims-of-the-project}
+\addcontentsline{toc}{section}{Research questions and aims of the project}
+
+With most of the data from all the Olympic data since its inception. The main questions we need to ask is
+
+\emph{1) Have the events of the Olympics stayed the same? What way are they different today as apposed to the inception date?}
+
+\emph{2) Is the number of medals obtained proportionate to the number of athletes? Can we send one athlete and have them obtain twice as many medals in events as an individual athlete? Is the number of athletes on a team proportionate to the number of medals that the team can win?}
+
+\emph{3) What are the sports that have the most events and as such the highest potential to win a medal? Has this always been the case? What are the future predictions for medal obtainment moving into the next Olympic games in both Summer and Winter Olympics?}
+
+This report attempts to answer all the above questions in an attempt to select the optimum number of athletes, either per team or per sport to send to the Olympics to maximize the return on the number of medals obtained.
+
+In the next section I took a look at the rational behind why this investigation is important.
+
+\section*{Rationale}\label{rationale}
+\addcontentsline{toc}{section}{Rationale}
 
 It is no real stretch to underestimate the importance of pride that can come from winning many medals at an Olympic games. From the eyes of the country the cost to participate can be exorbitant to send one athlete, let alone an entire team of athletes. The rational for this project is to maximize the number of medals that a country can win, whilst reducing the costs of sending athletes to perform on this stage. I am looking for the optimal number of competing athletes to maximize the gold. In order to look into this problem, we can use past results in order to predict the future.
-I am unsure at this stage if we can look at this in the scope of the entire country or if we can reduce this to certain sporting events, such as swimming or track and field teams.
 
-\section{Data Description}\label{data-description}
+Using the data from the past we can look for trends specific to our country (or team), and across sports. We can get insights regarding the number of events that we enter to see if this is proportionate to the number of medals we can expect regarding to the team or sport. Furthermore we can get insights regarding sports with waning interests or declining numbers and vice-versa.
+
+Getting a dossier of this information, a nation will be well equipped to send the appropriate team numbers to the next games, confidently reducing travel and stay costs for the athlete, whilst still able to procure the most medals possible. This is a win for the athletes and the country pride that is associated with a win on a global stage.
+
+In the next section we take a look into the data descriptions, and how the data was obtained.
+
+\newpage
+
+\section*{Data Description}\label{data-description}
+\addcontentsline{toc}{section}{Data Description}
 
 The (\citeproc{ref-bansal_2021_olympics_}{Bansal 2021}) data set called ``Olympics\_'' was compiled by ``Harsh Bansal'' and was last updated 4 years ago. The dataset was uploaded and sourced from Kaggle (\citeproc{ref-keating_2025_kaggle}{Keating et al. 2025}). According to the site, there is only one owner with no DOI Citation, provenance or license. The restriction on the data is placed on it by Kaggle by way of citation of the owner ``Harsh Bansal''. I am using this data at my own risk as it has not been authenticated or carefully curated.
 
@@ -301,7 +325,7 @@ Medal & Gold, Silver, Bronze, or NA\\
 \bottomrule
 \end{longtable}
 
-The research will center around the NOC, Season, Year, Sport and Medals. I am trying to work out if sending more athletes equates to more medals. If I can isolate what year there is differences in the medal tally for some countries we can pinpoint what if anything was occurring in that country at the time. This may give insight to the specific number of athletes required to send to the games to capitalize on medals.
+The research will center around the ID, NOC, Season, Year, Sport and Medals. I am trying to work out if sending more athletes equates to more medals. If I can isolate what year there is differences in the medal tally for some countries we can pinpoint what if anything was occurring in that country at the time. This may give insight to the specific number of athletes required to send to the games to capitalize on medals.
 
 In the athletes table there is a field called NOC which is the National Olympic City code that links to the country definitions that will allow for better groupings of data by country when linked to each other.
 
@@ -313,13 +337,24 @@ To represent the data on a world map I needed to obtain another data set of data
 \caption{\label{fig:OlympicAll}Mapping the NOC codes to longitude and latitude points on the world map}
 \end{figure}
 
-\section{Exploritory data analysis}\label{exploritory-data-analysis}
+Whilst working with this data set, and considering the questions that are being asked. The categories that are most relevant in this data set are all categorical variables, that are quantified with counts to extrapolate unique athlete ID's, or Team members, to counts of medals in all categories, gold, silver, bronze or no medal awarded. For this reason I have factored all the categorical data for ease of use.
 
-When loading in the data I have determined from the events table, the variables Sex, NOC, Season, and medals are all factor variables and needed to be coded this way in R.
+In the next section I take a look at some of the tables and figures that can answer the questions that arose in Research Questions which will guide any conclusions that I come up with to answer them.
 
-Table \ref{tab:SummerWinners}
+\newpage
 
-Table \ref{tab:WinterWinners}
+\section*{Exploritory data analysis}\label{exploritory-data-analysis}
+\addcontentsline{toc}{section}{Exploritory data analysis}
+
+When loading in the data I have determined from the events table, the variables ID, Team, NOC, Season, Sport, and Medals are all factor variables and needed to be coded this way in R. These are the variables that the investigation is centered around.
+
+Every line in the data set represents an event. It contains all the athlete competitors if they win or not. Therefor to get quantifiable data I need to use counts to gather a lot of my numerical data.
+
+Looking into \emph{1) Have the events of the Olympics stayed the same? What way are they different today as apposed to the inception date?} I begin with a specific year of an Olympic games. Table \ref{tab:SummerWinners} takes a look at the number of medals available for the inception data of the summer Olympics in 1896 as apposed to the last summer games in the data set of 2016. On the left side we can see that there are only 9 sports, and 143 medals. This is correct to the reported data mentioned in (\citeproc{ref-a2020_olympic}{History and Heritage 2020}). On the right side we can see that in 2016 there are now a lot more sports on offer, over 30 types. Interestingly all the sports that existed in the summer games in 1896 are still being represented in the Summer Olympic Games in 2016.
+
+A similar story can be said about the winter Olympics when looking at Table \ref{tab:WinterWinners}. In 1924, on the left side there are ten sports. On the right there are fifteen sports being competed in in 2014. There are some sports that are no longer competed in from the 1924 such as Military Ski Patrol.
+
+Whilst there are a lot more medals on offer in the later Olympics, the dynamic of the Olympics has changed dramatically through the years. This poses a problem with the investigation because there are now new sports that were not even conceived in the early games. Even though there are new sporting events there is no evidence as to how many athletes we should send to capitalise on the medals.
 
 \begin{table}
 \centering\caption{\label{tab:SummerWinners}Number of medal winners in 1896 versus 2016 Summer Olympic Games}
@@ -392,7 +427,7 @@ Wrestling & 72\\
 \newpage
 
 \begin{table}
-\centering\caption{\label{tab:WinterWinners}Winter Sport Total Medals won}
+\centering\caption{\label{tab:WinterWinners}Number of medal winners in 1924 versus 2014 Winter Olympic Games}
 
 \centering
 \begin{tabular}[t]{lr}
@@ -438,170 +473,320 @@ Speed Skating & 51\\
 \end{tabular}
 \end{table}
 
-\begin{table}
-\centering\caption{\label{tab:SummerBreakDownWinners}Medal allocation for 1896 versus 2016 Summer Olympic Games}
+\newpage
 
+Summer Breakdown
+
+The next two by twos is for Summer and Winter Medal Winners by Teams
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{summer1 }\OtherTok{\textless{}{-}} \FunctionTok{MedalBreakDownByTeam}\NormalTok{(}\StringTok{"Summer"}\NormalTok{, }\DecValTok{1896}\NormalTok{)}
+
+\NormalTok{summer1 }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  kableExtra}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\StringTok{"latex"}\NormalTok{, }\AttributeTok{position =} \StringTok{"H"}\NormalTok{,  }\AttributeTok{booktabs =}\NormalTok{ T,}
+         \AttributeTok{label =} \StringTok{"SummerBreakDownWinners1"}\NormalTok{,}
+         \AttributeTok{caption =} \StringTok{"Medal allocation for 1896 Summer Olympic Games"}\NormalTok{,) }\SpecialCharTok{\%\textgreater{}\%} 
+         \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{latex\_options =} \StringTok{"striped"}\NormalTok{, }\AttributeTok{font\_size =} \DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[H]
 \centering
-\begin{tabular}[t]{lrrrr}
-\toprule
-Sport & Gold & Silver & Bronze & \vphantom{1} Total\\
-\midrule
-\cellcolor{gray!10}{Athletics} & \cellcolor{gray!10}{12} & \cellcolor{gray!10}{13} & \cellcolor{gray!10}{12} & \cellcolor{gray!10}{37}\\
-Cycling & 6 & 6 & 4 & 16\\
-\cellcolor{gray!10}{Fencing} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{9}\\
-Gymnastics & 26 & 6 & 5 & 37\\
-\cellcolor{gray!10}{Shooting} & \cellcolor{gray!10}{5} & \cellcolor{gray!10}{5} & \cellcolor{gray!10}{5} & \cellcolor{gray!10}{15}\\
-\addlinespace
-Swimming & 4 & 4 & 2 & 10\\
-\cellcolor{gray!10}{Tennis} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{10}\\
-Weightlifting & 2 & 2 & 2 & 6\\
-\cellcolor{gray!10}{Wrestling} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{3}\\
-\bottomrule
-\end{tabular}
-\centering
-\begin{tabular}[t]{lrrrr}
-\toprule
-Sport & Gold & Silver & Bronze & Total\\
-\midrule
-\cellcolor{gray!10}{Archery} & \cellcolor{gray!10}{8} & \cellcolor{gray!10}{8} & \cellcolor{gray!10}{8} & \cellcolor{gray!10}{24}\\
-Athletics & 66 & 64 & 62 & 192\\
-\cellcolor{gray!10}{Badminton} & \cellcolor{gray!10}{8} & \cellcolor{gray!10}{8} & \cellcolor{gray!10}{8} & \cellcolor{gray!10}{24}\\
-Basketball & 24 & 24 & 24 & 72\\
-\cellcolor{gray!10}{Beach Volleyball} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{12}\\
-\addlinespace
-Boxing & 13 & 12 & 26 & 51\\
-\cellcolor{gray!10}{Canoeing} & \cellcolor{gray!10}{27} & \cellcolor{gray!10}{27} & \cellcolor{gray!10}{28} & \cellcolor{gray!10}{82}\\
-Cycling & 27 & 28 & 29 & 84\\
-\cellcolor{gray!10}{Diving} & \cellcolor{gray!10}{12} & \cellcolor{gray!10}{12} & \cellcolor{gray!10}{12} & \cellcolor{gray!10}{36}\\
-Equestrianism & 15 & 15 & 15 & 45\\
-\addlinespace
-\cellcolor{gray!10}{Fencing} & \cellcolor{gray!10}{21} & \cellcolor{gray!10}{22} & \cellcolor{gray!10}{22} & \cellcolor{gray!10}{65}\\
-Football & 35 & 35 & 36 & 106\\
-\cellcolor{gray!10}{Golf} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{6}\\
-Gymnastics & 22 & 22 & 22 & 66\\
-\cellcolor{gray!10}{Handball} & \cellcolor{gray!10}{29} & \cellcolor{gray!10}{31} & \cellcolor{gray!10}{29} & \cellcolor{gray!10}{89}\\
-\addlinespace
-Hockey & 34 & 32 & 33 & 99\\
-\cellcolor{gray!10}{Judo} & \cellcolor{gray!10}{14} & \cellcolor{gray!10}{14} & \cellcolor{gray!10}{28} & \cellcolor{gray!10}{56}\\
-Modern Pentathlon & 2 & 2 & 2 & 6\\
-\cellcolor{gray!10}{Rhythmic Gymnastics} & \cellcolor{gray!10}{6} & \cellcolor{gray!10}{6} & \cellcolor{gray!10}{6} & \cellcolor{gray!10}{18}\\
-Rowing & 48 & 48 & 48 & 144\\
-\addlinespace
-\cellcolor{gray!10}{Rugby Sevens} & \cellcolor{gray!10}{25} & \cellcolor{gray!10}{24} & \cellcolor{gray!10}{25} & \cellcolor{gray!10}{74}\\
-Sailing & 15 & 15 & 15 & 45\\
-\cellcolor{gray!10}{Shooting} & \cellcolor{gray!10}{15} & \cellcolor{gray!10}{15} & \cellcolor{gray!10}{15} & \cellcolor{gray!10}{45}\\
-Swimming & 71 & 63 & 57 & 191\\
-\cellcolor{gray!10}{Synchronized Swimming} & \cellcolor{gray!10}{11} & \cellcolor{gray!10}{11} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{32}\\
-\addlinespace
-Table Tennis & 8 & 8 & 8 & 24\\
-\cellcolor{gray!10}{Taekwondo} & \cellcolor{gray!10}{8} & \cellcolor{gray!10}{8} & \cellcolor{gray!10}{16} & \cellcolor{gray!10}{32}\\
-Tennis & 8 & 8 & 8 & 24\\
-\cellcolor{gray!10}{Trampolining} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{6}\\
-Triathlon & 2 & 2 & 2 & 6\\
-\addlinespace
-\cellcolor{gray!10}{Volleyball} & \cellcolor{gray!10}{24} & \cellcolor{gray!10}{24} & \cellcolor{gray!10}{24} & \cellcolor{gray!10}{72}\\
-Water Polo & 26 & 26 & 26 & 78\\
-\cellcolor{gray!10}{Weightlifting} & \cellcolor{gray!10}{15} & \cellcolor{gray!10}{15} & \cellcolor{gray!10}{15} & \cellcolor{gray!10}{45}\\
-Wrestling & 18 & 18 & 36 & 72\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{table}
-\centering\caption{\label{tab:WinterBreakDownWinners}Medal allocation for 1924 versus 2014 Winter Olympic Games}
-
+\caption{\label{tab:SummerBreakDownWinners1}Medal allocation for 1896 Summer Olympic Games}
 \centering
 \fontsize{7}{9}\selectfont
-\begin{tabular}[t]{lrrrr}
+\begin{tabular}[t]{lrrrrrr}
 \toprule
-Sport & Gold & Silver & Bronze & \vphantom{1} Total\\
+Team & None & Gold & Silver & Bronze & TotalEvents & TotalMedals\\
 \midrule
-\cellcolor{gray!10}{Alpinism} & \cellcolor{gray!10}{21} & \cellcolor{gray!10}{} & \cellcolor{gray!10}{} & \cellcolor{gray!10}{21}\\
-Bobsleigh & 4 & 4 & 5 & 13\\
-\cellcolor{gray!10}{Cross Country Skiing} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{6}\\
-Curling & 4 & 8 & 4 & 16\\
-\cellcolor{gray!10}{Figure Skating} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{12}\\
+\cellcolor{gray!10}{Greece} & \cellcolor{gray!10}{96} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{16} & \cellcolor{gray!10}{18} & \cellcolor{gray!10}{140} & \cellcolor{gray!10}{44}\\
+Germany & 62 & 24 & 5 & 2 & 93 & 31\\
+\cellcolor{gray!10}{United States} & \cellcolor{gray!10}{7} & \cellcolor{gray!10}{11} & \cellcolor{gray!10}{7} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{27} & \cellcolor{gray!10}{20}\\
+France & 15 & 5 & 4 & 2 & 26 & 11\\
+\cellcolor{gray!10}{Great Britain} & \cellcolor{gray!10}{16} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{23} & \cellcolor{gray!10}{7}\\
 \addlinespace
-Ice Hockey & 9 & 9 & 10 & 28\\
-\cellcolor{gray!10}{Military Ski Patrol} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{12}\\
-Nordic Combined & 1 & 1 & 1 & 3\\
-\cellcolor{gray!10}{Ski Jumping} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{3}\\
-Speed Skating & 5 & 5 & 6 & 16\\
-\bottomrule
-\end{tabular}
-\centering
-\begin{tabular}[t]{lrrrr}
-\toprule
-\cellcolor{gray!10}{Sport} & \cellcolor{gray!10}{Gold} & \cellcolor{gray!10}{Silver} & \cellcolor{gray!10}{Bronze} & \cellcolor{gray!10}{Total}\\
-\midrule
-Alpine Skiing & 11 & 9 & 11 & 31\\
-\cellcolor{gray!10}{Biathlon} & \cellcolor{gray!10}{20} & \cellcolor{gray!10}{20} & \cellcolor{gray!10}{20} & \cellcolor{gray!10}{60}\\
-Bobsleigh & 8 & 8 & 8 & 24\\
-\cellcolor{gray!10}{Cross Country Skiing} & \cellcolor{gray!10}{20} & \cellcolor{gray!10}{20} & \cellcolor{gray!10}{20} & \cellcolor{gray!10}{60}\\
-Curling & 8 & 8 & 8 & 24\\
+Denmark & 9 & 1 & 2 & 3 & 15 & 6\\
+\cellcolor{gray!10}{Hungary} & \cellcolor{gray!10}{12} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{18} & \cellcolor{gray!10}{6}\\
+Austria & 3 & 2 & 1 & 2 & 8 & 5\\
+\cellcolor{gray!10}{Switzerland} & \cellcolor{gray!10}{5} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{8} & \cellcolor{gray!10}{3}\\
+Australia & 2 & 2 & 0 & 0 & 4 & 2\\
 \addlinespace
-\cellcolor{gray!10}{Figure Skating} & \cellcolor{gray!10}{16} & \cellcolor{gray!10}{15} & \cellcolor{gray!10}{14} & \cellcolor{gray!10}{45}\\
-Freestyle Skiing & 10 & 10 & 10 & 30\\
-\cellcolor{gray!10}{Ice Hockey} & \cellcolor{gray!10}{44} & \cellcolor{gray!10}{43} & \cellcolor{gray!10}{43} & \cellcolor{gray!10}{130}\\
-Luge & 8 & 8 & 8 & 24\\
-\cellcolor{gray!10}{Nordic Combined} & \cellcolor{gray!10}{6} & \cellcolor{gray!10}{6} & \cellcolor{gray!10}{6} & \cellcolor{gray!10}{18}\\
+\cellcolor{gray!10}{Australia/Great Britain} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{2}\\
+Ethnikos Gymnastikos Syllogos & 0 & 0 & 0 & 2 & 2 & 2\\
+\cellcolor{gray!10}{Great Britain/Germany} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{2}\\
+Greece-1 & 0 & 0 & 2 & 0 & 2 & 2\\
+\cellcolor{gray!10}{Greece-2} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{0}\\
 \addlinespace
-Short Track Speed Skating & 15 & 14 & 14 & 43\\
-\cellcolor{gray!10}{Skeleton} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{6}\\
-Ski Jumping & 7 & 7 & 7 & 21\\
-\cellcolor{gray!10}{Snowboarding} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{30}\\
-Speed Skating & 17 & 17 & 17 & 51\\
+Greece-3 & 2 & 0 & 0 & 0 & 2 & 0\\
+\cellcolor{gray!10}{Italy} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{0}\\
+Sweden & 5 & 0 & 0 & 0 & 5 & 0\\
 \bottomrule
 \end{tabular}
 \end{table}
-
-\begin{table}
-\centering\caption{\label{tab:SummerBreakDownWinnersTeam}Medal allocation for 1896 versus 2016 Summer Olympic Games by Team}
-
-\centering
-\fontsize{7}{9}\selectfont
-\begin{tabular}[t]{lrrrr}
-\toprule
-Sport & Gold & Silver & Bronze & \vphantom{1} Total\\
-\midrule
-\cellcolor{gray!10}{Greece} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{18} & \cellcolor{gray!10}{16} & \cellcolor{gray!10}{44}\\
-Germany & 24 & 2 & 5 & 31\\
-\cellcolor{gray!10}{United States} & \cellcolor{gray!10}{11} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{7} & \cellcolor{gray!10}{20}\\
-France & 5 & 2 & 4 & 11\\
-\cellcolor{gray!10}{Great Britain} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{7}\\
-\addlinespace
-Denmark & 1 & 3 & 2 & 6\\
-\cellcolor{gray!10}{Hungary} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{6}\\
-Austria & 2 & 2 & 1 & 5\\
-\cellcolor{gray!10}{Switzerland} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{3}\\
-Australia & 2 &  &  & 2\\
-\bottomrule
-\end{tabular}
-\centering
-\begin{tabular}[t]{lrrrr}
-\toprule
-\cellcolor{gray!10}{Sport} & \cellcolor{gray!10}{Gold} & \cellcolor{gray!10}{Silver} & \cellcolor{gray!10}{Bronze} & \cellcolor{gray!10}{Total}\\
-\midrule
-United States & 52 & 137 & 67 & 256\\
-\cellcolor{gray!10}{Germany} & \cellcolor{gray!10}{43} & \cellcolor{gray!10}{47} & \cellcolor{gray!10}{67} & \cellcolor{gray!10}{157}\\
-Great Britain & 55 & 64 & 26 & 145\\
-\cellcolor{gray!10}{Russia} & \cellcolor{gray!10}{28} & \cellcolor{gray!10}{50} & \cellcolor{gray!10}{35} & \cellcolor{gray!10}{113}\\
-China & 30 & 44 & 35 & 109\\
-\addlinespace
-\cellcolor{gray!10}{France} & \cellcolor{gray!10}{55} & \cellcolor{gray!10}{20} & \cellcolor{gray!10}{21} & \cellcolor{gray!10}{96}\\
-Australia & 34 & 23 & 25 & 82\\
-\cellcolor{gray!10}{Italy} & \cellcolor{gray!10}{38} & \cellcolor{gray!10}{8} & \cellcolor{gray!10}{24} & \cellcolor{gray!10}{70}\\
-Canada & 4 & 4 & 61 & 69\\
-\cellcolor{gray!10}{Japan} & \cellcolor{gray!10}{13} & \cellcolor{gray!10}{17} & \cellcolor{gray!10}{34} & \cellcolor{gray!10}{64}\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\section{Conclusion / Discussion}\label{conclusion-discussion}
 
 \newpage
 
-\#Session Information
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{summer2 }\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(}\FunctionTok{MedalBreakDownByTeam}\NormalTok{(}\StringTok{"Summer"}\NormalTok{, }\DecValTok{2016}\NormalTok{), }\DecValTok{30}\NormalTok{)}
+
+\NormalTok{summer2 }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  kableExtra}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\StringTok{"latex"}\NormalTok{, }\AttributeTok{position =} \StringTok{"H"}\NormalTok{,  }\AttributeTok{booktabs =}\NormalTok{ T,}
+         \AttributeTok{label =} \StringTok{"SummerBreakDownWinners2"}\NormalTok{,}
+         \AttributeTok{caption =} \StringTok{"Medal allocation for 2016 Summer Olympic Games for the top 30 teams"}\NormalTok{,) }\SpecialCharTok{\%\textgreater{}\%} 
+         \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{latex\_options =} \StringTok{"striped"}\NormalTok{, }\AttributeTok{font\_size =} \DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:SummerBreakDownWinners2}Medal allocation for 2016 Summer Olympic Games for the top 30 teams}
+\centering
+\fontsize{7}{9}\selectfont
+\begin{tabular}[t]{lrrrrrr}
+\toprule
+Team & None & Gold & Silver & Bronze & TotalEvents & TotalMedals\\
+\midrule
+\cellcolor{gray!10}{United States} & \cellcolor{gray!10}{443} & \cellcolor{gray!10}{137} & \cellcolor{gray!10}{52} & \cellcolor{gray!10}{67} & \cellcolor{gray!10}{699} & \cellcolor{gray!10}{256}\\
+Germany & 371 & 47 & 43 & 67 & 528 & 157\\
+\cellcolor{gray!10}{Great Britain} & \cellcolor{gray!10}{325} & \cellcolor{gray!10}{64} & \cellcolor{gray!10}{55} & \cellcolor{gray!10}{26} & \cellcolor{gray!10}{470} & \cellcolor{gray!10}{145}\\
+Russia & 285 & 50 & 28 & 35 & 398 & 113\\
+\cellcolor{gray!10}{China} & \cellcolor{gray!10}{374} & \cellcolor{gray!10}{44} & \cellcolor{gray!10}{30} & \cellcolor{gray!10}{35} & \cellcolor{gray!10}{483} & \cellcolor{gray!10}{109}\\
+\addlinespace
+France & 408 & 20 & 55 & 21 & 504 & 96\\
+\cellcolor{gray!10}{Australia} & \cellcolor{gray!10}{428} & \cellcolor{gray!10}{23} & \cellcolor{gray!10}{34} & \cellcolor{gray!10}{25} & \cellcolor{gray!10}{510} & \cellcolor{gray!10}{82}\\
+Italy & 325 & 8 & 38 & 24 & 395 & 70\\
+\cellcolor{gray!10}{Canada} & \cellcolor{gray!10}{328} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{61} & \cellcolor{gray!10}{397} & \cellcolor{gray!10}{69}\\
+Japan & 372 & 17 & 13 & 34 & 436 & 64\\
+\addlinespace
+\cellcolor{gray!10}{Serbia} & \cellcolor{gray!10}{73} & \cellcolor{gray!10}{14} & \cellcolor{gray!10}{27} & \cellcolor{gray!10}{13} & \cellcolor{gray!10}{127} & \cellcolor{gray!10}{54}\\
+Brazil & 525 & 34 & 6 & 6 & 571 & 46\\
+\cellcolor{gray!10}{Netherlands} & \cellcolor{gray!10}{276} & \cellcolor{gray!10}{9} & \cellcolor{gray!10}{25} & \cellcolor{gray!10}{11} & \cellcolor{gray!10}{321} & \cellcolor{gray!10}{45}\\
+Spain & 310 & 7 & 19 & 17 & 353 & 43\\
+\cellcolor{gray!10}{Denmark} & \cellcolor{gray!10}{102} & \cellcolor{gray!10}{15} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{16} & \cellcolor{gray!10}{143} & \cellcolor{gray!10}{41}\\
+\addlinespace
+New Zealand & 196 & 6 & 25 & 5 & 232 & 36\\
+\cellcolor{gray!10}{Jamaica} & \cellcolor{gray!10}{47} & \cellcolor{gray!10}{11} & \cellcolor{gray!10}{17} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{77} & \cellcolor{gray!10}{30}\\
+Sweden & 158 & 2 & 23 & 3 & 186 & 28\\
+\cellcolor{gray!10}{Croatia} & \cellcolor{gray!10}{69} & \cellcolor{gray!10}{7} & \cellcolor{gray!10}{15} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{93} & \cellcolor{gray!10}{24}\\
+South Korea & 231 & 13 & 3 & 8 & 255 & 24\\
+\addlinespace
+\cellcolor{gray!10}{South Africa} & \cellcolor{gray!10}{132} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{7} & \cellcolor{gray!10}{14} & \cellcolor{gray!10}{155} & \cellcolor{gray!10}{23}\\
+Argentina & 206 & 21 & 1 & 0 & 228 & 22\\
+\cellcolor{gray!10}{Hungary} & \cellcolor{gray!10}{182} & \cellcolor{gray!10}{12} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{7} & \cellcolor{gray!10}{204} & \cellcolor{gray!10}{22}\\
+Belgium & 117 & 2 & 17 & 2 & 138 & 21\\
+\cellcolor{gray!10}{Norway} & \cellcolor{gray!10}{58} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{19} & \cellcolor{gray!10}{77} & \cellcolor{gray!10}{19}\\
+\addlinespace
+Azerbaijan & 51 & 1 & 7 & 10 & 69 & 18\\
+\cellcolor{gray!10}{Kazakhstan} & \cellcolor{gray!10}{105} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{5} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{123} & \cellcolor{gray!10}{18}\\
+Nigeria & 59 & 0 & 0 & 18 & 77 & 18\\
+\cellcolor{gray!10}{Poland} & \cellcolor{gray!10}{269} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{285} & \cellcolor{gray!10}{16}\\
+Romania & 101 & 4 & 2 & 10 & 117 & 16\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{winter1 }\OtherTok{\textless{}{-}} \FunctionTok{MedalBreakDownByTeam}\NormalTok{(}\StringTok{"Winter"}\NormalTok{, }\DecValTok{1924}\NormalTok{)}
+
+\NormalTok{winter1 }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  kableExtra}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\StringTok{"latex"}\NormalTok{, }\AttributeTok{position =} \StringTok{"H"}\NormalTok{,  }\AttributeTok{booktabs =}\NormalTok{ T,}
+         \AttributeTok{label =} \StringTok{"WinterBreakDownWinners1"}\NormalTok{,}
+         \AttributeTok{caption =} \StringTok{"Medal allocation for 1924 Winter Olympic Games"}\NormalTok{,) }\SpecialCharTok{\%\textgreater{}\%} 
+         \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{latex\_options =} \StringTok{"striped"}\NormalTok{, }\AttributeTok{font\_size =} \DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:WinterBreakDownWinners1}Medal allocation for 1924 Winter Olympic Games}
+\centering
+\fontsize{7}{9}\selectfont
+\begin{tabular}[t]{lrrrrrr}
+\toprule
+Team & None & Gold & Silver & Bronze & TotalEvents & TotalMedals\\
+\midrule
+\cellcolor{gray!10}{Great Britain} & \cellcolor{gray!10}{11} & \cellcolor{gray!10}{16} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{11} & \cellcolor{gray!10}{38} & \cellcolor{gray!10}{27}\\
+Norway & 19 & 4 & 7 & 6 & 36 & 17\\
+\cellcolor{gray!10}{Finland} & \cellcolor{gray!10}{18} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{8} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{33} & \cellcolor{gray!10}{15}\\
+United States & 29 & 1 & 10 & 1 & 41 & 12\\
+\cellcolor{gray!10}{Canada} & \cellcolor{gray!10}{8} & \cellcolor{gray!10}{9} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{17} & \cellcolor{gray!10}{9}\\
+\addlinespace
+Sweden & 32 & 1 & 8 & 0 & 41 & 9\\
+\cellcolor{gray!10}{France} & \cellcolor{gray!10}{48} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{8} & \cellcolor{gray!10}{56} & \cellcolor{gray!10}{8}\\
+India & 0 & 7 & 0 & 0 & 7 & 7\\
+\cellcolor{gray!10}{Belgium-1} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{5} & \cellcolor{gray!10}{5} & \cellcolor{gray!10}{5}\\
+Switzerland & 26 & 4 & 0 & 1 & 31 & 5\\
+\addlinespace
+\cellcolor{gray!10}{Austria} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{4}\\
+Great Britain-1 & 2 & 0 & 4 & 0 & 6 & 4\\
+\cellcolor{gray!10}{Switzerland-1} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{4}\\
+France-1 & 4 & 0 & 0 & 2 & 6 & 2\\
+\cellcolor{gray!10}{Australia} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{1}\\
+\addlinespace
+Nepal & 0 & 1 & 0 & 0 & 1 & 1\\
+\cellcolor{gray!10}{Belgium} & \cellcolor{gray!10}{27} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{27} & \cellcolor{gray!10}{0}\\
+Czechoslovakia & 31 & 0 & 0 & 0 & 31 & 0\\
+\cellcolor{gray!10}{France-2} & \cellcolor{gray!10}{6} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{6} & \cellcolor{gray!10}{0}\\
+Great Britain-2 & 6 & 0 & 0 & 0 & 6 & 0\\
+\addlinespace
+\cellcolor{gray!10}{Hungary} & \cellcolor{gray!10}{6} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{6} & \cellcolor{gray!10}{0}\\
+Italy & 14 & 0 & 0 & 0 & 14 & 0\\
+\cellcolor{gray!10}{Italy-1} & \cellcolor{gray!10}{5} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{5} & \cellcolor{gray!10}{0}\\
+Italy-2 & 5 & 0 & 0 & 0 & 5 & 0\\
+\cellcolor{gray!10}{Latvia} & \cellcolor{gray!10}{7} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{7} & \cellcolor{gray!10}{0}\\
+\addlinespace
+Poland & 15 & 0 & 0 & 0 & 15 & 0\\
+\cellcolor{gray!10}{Switzerland-2} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{0}\\
+Yugoslavia & 7 & 0 & 0 & 0 & 7 & 0\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{winter2 }\OtherTok{\textless{}{-}} \FunctionTok{head}\NormalTok{(}\FunctionTok{MedalBreakDownByTeam}\NormalTok{(}\StringTok{"Winter"}\NormalTok{, }\DecValTok{2014}\NormalTok{),}\DecValTok{30}\NormalTok{)}
+
+\NormalTok{winter2 }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  kableExtra}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\StringTok{"latex"}\NormalTok{, }\AttributeTok{position =} \StringTok{"H"}\NormalTok{,  }\AttributeTok{booktabs =}\NormalTok{ T,}
+         \AttributeTok{label =} \StringTok{"WinterBreakDownWinners2"}\NormalTok{,}
+         \AttributeTok{caption =} \StringTok{"Medal allocation for 2014 Winter Olympic Games for the top 30 teams"}\NormalTok{,) }\SpecialCharTok{\%\textgreater{}\%} 
+         \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{latex\_options =} \StringTok{"striped"}\NormalTok{, }\AttributeTok{font\_size =} \DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[H]
+\centering
+\caption{\label{tab:WinterBreakDownWinners2}Medal allocation for 2014 Winter Olympic Games for the top 30 teams}
+\centering
+\fontsize{7}{9}\selectfont
+\begin{tabular}[t]{lrrrrrr}
+\toprule
+Team & None & Gold & Silver & Bronze & TotalEvents & TotalMedals\\
+\midrule
+\cellcolor{gray!10}{Canada} & \cellcolor{gray!10}{241} & \cellcolor{gray!10}{57} & \cellcolor{gray!10}{20} & \cellcolor{gray!10}{5} & \cellcolor{gray!10}{323} & \cellcolor{gray!10}{82}\\
+Russia & 261 & 25 & 20 & 11 & 317 & 56\\
+\cellcolor{gray!10}{United States} & \cellcolor{gray!10}{281} & \cellcolor{gray!10}{8} & \cellcolor{gray!10}{28} & \cellcolor{gray!10}{16} & \cellcolor{gray!10}{333} & \cellcolor{gray!10}{52}\\
+Sweden & 97 & 8 & 32 & 11 & 148 & 51\\
+\cellcolor{gray!10}{Norway} & \cellcolor{gray!10}{183} & \cellcolor{gray!10}{18} & \cellcolor{gray!10}{5} & \cellcolor{gray!10}{13} & \cellcolor{gray!10}{219} & \cellcolor{gray!10}{36}\\
+\addlinespace
+Finland & 114 & 2 & 7 & 24 & 147 & 33\\
+\cellcolor{gray!10}{Germany} & \cellcolor{gray!10}{203} & \cellcolor{gray!10}{13} & \cellcolor{gray!10}{12} & \cellcolor{gray!10}{7} & \cellcolor{gray!10}{235} & \cellcolor{gray!10}{32}\\
+Netherlands & 53 & 13 & 7 & 9 & 82 & 29\\
+\cellcolor{gray!10}{Switzerland} & \cellcolor{gray!10}{187} & \cellcolor{gray!10}{6} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{20} & \cellcolor{gray!10}{215} & \cellcolor{gray!10}{28}\\
+Austria & 184 & 4 & 10 & 11 & 209 & 25\\
+\addlinespace
+\cellcolor{gray!10}{France} & \cellcolor{gray!10}{171} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{189} & \cellcolor{gray!10}{18}\\
+Italy & 201 & 0 & 2 & 12 & 215 & 14\\
+\cellcolor{gray!10}{South Korea} & \cellcolor{gray!10}{104} & \cellcolor{gray!10}{7} & \cellcolor{gray!10}{5} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{118} & \cellcolor{gray!10}{14}\\
+China & 93 & 3 & 4 & 5 & 105 & 12\\
+\cellcolor{gray!10}{Czech Republic} & \cellcolor{gray!10}{168} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{7} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{179} & \cellcolor{gray!10}{11}\\
+\addlinespace
+Japan & 160 & 1 & 4 & 6 & 171 & 11\\
+\cellcolor{gray!10}{Poland} & \cellcolor{gray!10}{138} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{149} & \cellcolor{gray!10}{11}\\
+Great Britain & 60 & 1 & 4 & 5 & 70 & 10\\
+\cellcolor{gray!10}{Russia-1} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{8} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{14} & \cellcolor{gray!10}{10}\\
+United States-1 & 4 & 2 & 2 & 6 & 14 & 10\\
+\addlinespace
+\cellcolor{gray!10}{Slovenia} & \cellcolor{gray!10}{108} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{116} & \cellcolor{gray!10}{8}\\
+Belarus & 66 & 5 & 0 & 1 & 72 & 6\\
+\cellcolor{gray!10}{Latvia-1} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{8} & \cellcolor{gray!10}{6}\\
+Latvia & 61 & 0 & 1 & 4 & 66 & 5\\
+\cellcolor{gray!10}{Ukraine} & \cellcolor{gray!10}{96} & \cellcolor{gray!10}{4} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{1} & \cellcolor{gray!10}{101} & \cellcolor{gray!10}{5}\\
+\addlinespace
+Canada-1 & 8 & 2 & 2 & 0 & 12 & 4\\
+\cellcolor{gray!10}{Germany-1} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{14} & \cellcolor{gray!10}{4}\\
+Australia & 81 & 0 & 2 & 1 & 84 & 3\\
+\cellcolor{gray!10}{Austria-1} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{0} & \cellcolor{gray!10}{2} & \cellcolor{gray!10}{2}\\
+Russia-2 & 12 & 0 & 2 & 0 & 14 & 2\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\newpage
+
+\begin{landscape}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{PropTeamWinners}\NormalTok{(}\StringTok{"Summer"}\NormalTok{, }\DecValTok{1896}\NormalTok{, }\StringTok{"Fill"}\NormalTok{, }\DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{C:/DSAA811-Final-Report/report/DSAA811_Final_files/figure-latex/medalProp-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{PropTeamWinners}\NormalTok{(}\StringTok{"Summer"}\NormalTok{, }\DecValTok{1896}\NormalTok{, }\StringTok{"Dodge"}\NormalTok{, }\DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{C:/DSAA811-Final-Report/report/DSAA811_Final_files/figure-latex/medalProp-2.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{PropTeamWinners}\NormalTok{(}\StringTok{"Winter"}\NormalTok{, }\DecValTok{1924}\NormalTok{, }\StringTok{"Fill"}\NormalTok{, }\DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{C:/DSAA811-Final-Report/report/DSAA811_Final_files/figure-latex/medalProp-3.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{PropTeamWinners}\NormalTok{(}\StringTok{"Winter"}\NormalTok{, }\DecValTok{1924}\NormalTok{, }\StringTok{"Dodge"}\NormalTok{, }\DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{C:/DSAA811-Final-Report/report/DSAA811_Final_files/figure-latex/medalProp-4.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{PropTeamAthleteWinners}\NormalTok{(}\StringTok{"Summer"}\NormalTok{, }\DecValTok{1896}\NormalTok{, }\StringTok{"Fill"}\NormalTok{, }\DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{C:/DSAA811-Final-Report/report/DSAA811_Final_files/figure-latex/medalPropAth-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{PropTeamAthleteWinners}\NormalTok{(}\StringTok{"Summer"}\NormalTok{, }\DecValTok{1896}\NormalTok{, }\StringTok{"Dodge"}\NormalTok{, }\DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{C:/DSAA811-Final-Report/report/DSAA811_Final_files/figure-latex/medalPropAth-2.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{PropTeamAthleteWinners}\NormalTok{(}\StringTok{"Winter"}\NormalTok{, }\DecValTok{1924}\NormalTok{, }\StringTok{"Fill"}\NormalTok{, }\DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{C:/DSAA811-Final-Report/report/DSAA811_Final_files/figure-latex/medalPropAth-3.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{PropTeamAthleteWinners}\NormalTok{(}\StringTok{"Winter"}\NormalTok{, }\DecValTok{1924}\NormalTok{, }\StringTok{"Dodge"}\NormalTok{, }\DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{C:/DSAA811-Final-Report/report/DSAA811_Final_files/figure-latex/medalPropAth-4.pdf}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{C:/DSAA811-Final-Report/report/DSAA811_Final_files/figure-latex/SportTrends-1.pdf}}
+
+\end{landscape}
+
+\newpage
+
+\section*{Conclusion / Discussion}\label{conclusion-discussion}
+\addcontentsline{toc}{section}{Conclusion / Discussion}
+
+\newpage
+
+\#Session Information \{-\}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -670,17 +855,17 @@ Canada & 4 & 4 & 61 & 69\\
 \bibitem[\citeproctext]{ref-bansal_2021_olympics_}
 Bansal, Harsh. 2021. {``Olympics\_.''} Kaggle.com. \url{https://www.kaggle.com/datasets/harshbansal27/olympics}.
 
-\bibitem[\citeproctext]{ref-condon_1999_predicting}
-Condon, Edward M, Bruce L Golden, and Edward A Wasil. 1999. {``Predicting the Success of Nations at the Summer Olympics Using Neural Networks.''} \emph{Computers \& Operations Research} 26 (November): 1243--65. \url{https://doi.org/10.1016/s0305-0548(99)00003-9}.
-
 \bibitem[\citeproctext]{ref-a262588213843476_2021_countries}
 Ferlet, Patrice. 2021. {``Countries Coordinates with Longitude and Latitude.''} Gist. \url{https://gist.github.com/metal3d/5b925077e66194551df949de64e910f6}.
 
-\bibitem[\citeproctext]{ref-haut_2014_nothing}
-Haut, Jan, Robert Prohl, and Eike Emrich. 2014. {``Nothing but Medals? Attitudes Towards the Importance of Olympic Success.''} \emph{International Review for the Sociology of Sport} 51 (March): 332--48. \url{https://doi.org/10.1177/1012690214526400}.
+\bibitem[\citeproctext]{ref-OxfordStudy}
+Flyvbjerg, Bent, Allison Stewart, and Alexander Budzier. 2016. {``The Oxford Olympics Study 2016: Cost and Cost Overrun at the Games.''} \emph{Saïd Business School Working Papers}, July. \url{https://doi.org/10.2139/ssrn.2804554}.
 
 \bibitem[\citeproctext]{ref-heazlewood_2006_prediction}
 Heazlewood, Timothy. 2006. {``Prediction Versus Reality: The Use of Mathematical Models to Predict Elite Performance in Swimming and Athletics at the Olympic Games.''} \emph{Journal of Sports Science \& Medicine} 5 (December): 480. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC3861753/}.
+
+\bibitem[\citeproctext]{ref-a2020_olympic}
+History, Parramatta, and Heritage. 2020. {``Olympic Games - a Brief History \textbar{} Parramatta History and Heritage.''} Nsw.gov.au. \url{https://historyandheritage.cityofparramatta.nsw.gov.au/research-topics/events/olympic-games-brief-history}.
 
 \bibitem[\citeproctext]{ref-keating_2025_kaggle}
 Keating, Nate, Jeff Moser, William Cukierski, Jerad Rose, Myles O'Neill, Risdal Meg, Meghan O'Connell, et al. 2025. {``Kaggle: Your Home for Data Science.''} Kaggle.com. \url{https://www.kaggle.com/}.

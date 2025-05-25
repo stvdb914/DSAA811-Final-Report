@@ -8,19 +8,25 @@ knit: (function(input, encoding) {
                     knit_root_dir = rprojroot::find_rstudio_root_file())})
 output: 
   bookdown::pdf_document2
+
+header-includes:
+  - \usepackage{pdflscape}
+  - \newcommand{\blandscape}{\begin{landscape}}
+  - \newcommand{\elandscape}{\end{landscape}}
 ---
 
 ```{r child = 'src/00_loader.Rmd', Include = TRUE, eval = FALSE}
 ```
 
-When loading in the data I have determined from the events table, the variables Sex, NOC, Season, and medals are all factor variables and needed to be coded this way in R. 
+When loading in the data I have determined from the events table, the variables ID, Team, NOC, Season, Sport, and Medals are all factor variables and needed to be coded this way in R. These are the variables that the investigation is centered around.
 
+Every line in the data set represents an event. It contains all the athlete competitors if they win or not. Therefor to get quantifiable data I need to use counts to gather a lot of my numerical data. 
 
+Looking into *1) Have the events of the Olympics stayed the same? What way are they different today as apposed to the inception date?* I begin with a specific year of an Olympic games. Table \@ref(tab:SummerWinners) takes a look at the number of medals available for the inception data of the summer Olympics in 1896 as apposed to the last summer games in the data set of 2016. On the left side we can see that there are only 9 sports, and 143 medals. This is correct to the reported data mentioned in [@a2020_olympic]. On the right side we can see that in 2016 there are now a lot more sports on offer, over 30 types. Interestingly all the sports that existed in the summer games in 1896 are still being represented in the Summer Olympic Games in 2016.
 
-Table \@ref(tab:SummerWinners)
+A similar story can be said about the winter Olympics when looking at Table \@ref(tab:WinterWinners). In 1924, on the left side there are ten sports. On the right there are fifteen sports being competed in in 2014. There are some sports that are no longer competed in from the 1924 such as Military Ski Patrol. 
 
-Table \@ref(tab:WinterWinners)
-
+Whilst there are a lot more medals on offer in the later Olympics, the dynamic of the Olympics has changed dramatically through the years. This poses a problem with the investigation because there are now new sports that were not even conceived in the early games. Even though there are new sporting events there is no evidence as to how many athletes we should send to capitalise on the medals.
 
 ```{r summerTables, warning = FALSE, echo = FALSE}
 summer1 <- MedalWinners("Summer", 1896)
@@ -29,55 +35,104 @@ summer2 <- MedalWinners("Summer", 2016)
 list(summer1,summer2) %>% 
   kableExtra::kable("latex", position = "H",  booktabs = T,
          label = "SummerWinners",
-         caption = "Number of medal winners in 1896 versus 2016 Summer Olympic Games",) %>% 
+         caption = "Number of medal winners in 1896 versus 2016 Summer Olympic Games") %>% 
          kable_styling(latex_options = "striped")
 ```
 \newpage
 
-```{r winterTables, warning=FALSE, echo=FALSE}
+```{r winterTables, warning=FALSE, echo = FALSE}
 
 winter1 <- MedalWinners("Winter", 1924)
 winter2 <- MedalWinners("Winter", 2014)
 
 list(winter1,winter2) %>% 
-  knitr::kable("latex", position = "H",  booktabs = T, caption = "Winter Sport Total Medals won",
+  knitr::kable("latex", position = "H",  booktabs = T, caption = "Number of medal winners in 1924 versus 2014 Winter Olympic Games",
          label = "WinterWinners") %>%  
          kable_styling(latex_options = "striped")
 ```
 
-```{r summerBreaks, warning = FALSE, echo = FALSE}
-summer1 <- MedalBreakDown("Summer", 1896)
-summer2 <- MedalBreakDown("Summer", 2016)
+\newpage
+Summer Breakdown 
+  
+The next two by twos is for Summer and Winter Medal Winners by Teams
 
-list(summer1,summer2) %>% 
+```{r summerBreaks, warning = FALSE, echo = TRUE}
+summer1 <- MedalBreakDownByTeam("Summer", 1896)
+
+summer1 %>% 
   kableExtra::kable("latex", position = "H",  booktabs = T,
-         label = "SummerBreakDownWinners",
-         caption = "Medal allocation for 1896 versus 2016 Summer Olympic Games",) %>% 
-         kable_styling(latex_options = "striped")
-```
-
-```{r winterBreaks, warning=FALSE, echo=FALSE}
-
-winter1 <- MedalBreakDown("Winter", 1924)
-winter2 <- MedalBreakDown("Winter", 2014)
-
-list(winter1,winter2) %>% 
-  kableExtra::kable("latex", position = "H",  booktabs = T,
-         label = "WinterBreakDownWinners",
-         caption = "Medal allocation for 1924 versus 2014 Winter Olympic Games",) %>% 
+         label = "SummerBreakDownWinners1",
+         caption = "Medal allocation for 1896 Summer Olympic Games",) %>% 
          kable_styling(latex_options = "striped", font_size = 7)
 ```
 
-```{r summerBreaksTeam, warning = FALSE, echo = FALSE}
-summer1 <- MedalBreakDownByTeam ("Summer", 1896)
-summer2 <- MedalBreakDownByTeam ("Summer", 2016)
+\newpage
 
-list(head(summer1,10),head(summer2,10)) %>% 
+```{r summerBreaks2, warning = FALSE, echo = TRUE}
+summer2 <- head(MedalBreakDownByTeam("Summer", 2016), 30)
+
+summer2 %>% 
   kableExtra::kable("latex", position = "H",  booktabs = T,
-         label = "SummerBreakDownWinnersTeam",
-         caption = "Medal allocation for 1896 versus 2016 Summer Olympic Games by Team",) %>% 
+         label = "SummerBreakDownWinners2",
+         caption = "Medal allocation for 2016 Summer Olympic Games for the top 30 teams",) %>% 
          kable_styling(latex_options = "striped", font_size = 7)
 ```
+
+\newpage
+
+```{r winterBreaks1, warning=FALSE, echo = TRUE}
+
+winter1 <- MedalBreakDownByTeam("Winter", 1924)
+
+winter1 %>% 
+  kableExtra::kable("latex", position = "H",  booktabs = T,
+         label = "WinterBreakDownWinners1",
+         caption = "Medal allocation for 1924 Winter Olympic Games",) %>% 
+         kable_styling(latex_options = "striped", font_size = 7)
+```
+
+```{r winterBreaks2, warning=FALSE, echo = TRUE}
+
+winter2 <- head(MedalBreakDownByTeam("Winter", 2014),30)
+
+winter2 %>% 
+  kableExtra::kable("latex", position = "H",  booktabs = T,
+         label = "WinterBreakDownWinners2",
+         caption = "Medal allocation for 2014 Winter Olympic Games for the top 30 teams",) %>% 
+         kable_styling(latex_options = "striped", font_size = 7)
+```
+
+\newpage
+
+\blandscape
+
+```{r medalProp, fig.width = 10, warning = FALSE, echo = TRUE}
+  
+  PropTeamWinners("Summer", 1896, "Fill", 30)
+  PropTeamWinners("Summer", 1896, "Dodge", 30)
+  
+  PropTeamWinners("Winter", 1924, "Fill", 30)
+  PropTeamWinners("Winter", 1924, "Dodge", 30)
+  
+```
+
+```{r medalPropAth, fig.width = 10, warning = FALSE, echo = TRUE}
+  
+  PropTeamAthleteWinners("Summer", 1896, "Fill", 30)
+  PropTeamAthleteWinners("Summer", 1896, "Dodge", 30)
+  
+  PropTeamAthleteWinners("Winter", 1924, "Fill", 30)
+  PropTeamAthleteWinners("Winter", 1924, "Dodge", 30)
+```
+
+```{r SportTrends, fig.width = 12, warning = FALSE, echo = FALSE}
+  sportTotals()
+```
+
+\elandscape
+
+
+
 
 
 

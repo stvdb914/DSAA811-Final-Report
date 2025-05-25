@@ -148,7 +148,7 @@ AthleteMedals <- function(strSeason, nYear) {
 # Australia entered 4 events in 1896 and won 2 gold medals, therefor
 # 50% of the event participation earned gold and 50% earned no medals.
 
-PropTeamWinners <- function(strSeason, nYear, myPos, nCountries = -1) {
+PropTeamWinners <- function(strSeason, nYear, myPos = "Fill", nCountries = -1) {
   #strSeason = Season of the olympics "Summer" or "Winter"
   #nYear     = The year of the olympics, eg 1896
   #myPos     = How you want the stacks to return "fill" lor "dodge"
@@ -166,7 +166,10 @@ PropTeamWinners <- function(strSeason, nYear, myPos, nCountries = -1) {
                                  labels = c("Gold", "Silver", "Bronze", "None"),
                                  ordered = TRUE)
   
-  ggplot(TeamMed1) +
+  ggplot(TeamMed1, aes(x = Medals/TotalEvents,
+                       y = reorder(Team,TotalMedals),
+                       fill = MedalType,
+                       group = fct_rev(MedalType))) +
     labs(title = paste0("Proportion of Medals Versus Events Participated in ",strSeason," ", nYear),
          x = "Proportion of Medals versus Events Participated in",
          y = "Olympic Team Name") +
@@ -174,12 +177,15 @@ PropTeamWinners <- function(strSeason, nYear, myPos, nCountries = -1) {
                  y = reorder(Team,TotalMedals),
                  fill = MedalType,
                  group = fct_rev(MedalType)), stat = "identity", position = myPos) +
-    scale_fill_manual(values = c("gold", "#C0C0C0", "#CD7F32", "white")) +
+    scale_fill_manual(values = c("gold", "#C0C0C0", "#CD7F32", "#FFFAF0")) +
+    #geom_text(aes(label=paste0(sprintf("%1.0f", (Medals/TotalEvents)*100),"%")),
+    #         position=position_fill(vjust=0.5), colour="#4682B4") +
     theme_classic()
 }
 
 #Calculating per Athlete
 PropTeamAthleteWinners <- function(strSeason, nYear, myPos, nCountries = -1) {
+  
   TeamAth1 <- left_join(MedalBreakDownByTeam(strSeason, nYear, nCountries), 
                         AthletesPerCountry(strSeason, nYear), 
                         join_by(Team)) %>% 
@@ -209,15 +215,15 @@ PropTeamAthleteWinners <- function(strSeason, nYear, myPos, nCountries = -1) {
                  y = reorder(Team,TotalMedals),
                  fill = MedalType,
                  group = fct_rev(MedalType)), stat = "identity", position = myPos) +
-    scale_fill_manual(values = c("gold", "#C0C0C0", "#CD7F32", "pink"), drop = FALSE) +
-    geom_text(aes(label=paste0(sprintf("%1.1f", (Medals/AthletesSent)*100),"%")),
-              position=position_fill(vjust=0.5), colour="white") +
+    scale_fill_manual(values = c("gold", "#C0C0C0", "#CD7F32", "#FFFAF0"), drop = FALSE) +
+    geom_text(aes(label=paste0(sprintf("%1.0f", (Medals/AthletesSent)*100),"%")),
+              position=position_fill(vjust=0.5), colour="#4682B4") +
     theme_classic()
-}
+ }
 
 # This function takes in the season and year of the olympics 
 # and generates a 
-PropTeamWinners <- function(strSeason, nYear) {
+PropTeamWinners2 <- function(strSeason, nYear) {
   TeamMed1 <- left_join(MedalBreakDownByTeam(strSeason, nYear), 
                         AthletesPerCountry(strSeason, nYear), 
                         join_by(Team)) %>% 
@@ -244,4 +250,33 @@ PropTeamWinners <- function(strSeason, nYear) {
                  group = MedalType), stat="identity", position="fill") 
 }
 
+#Trying to demonstrate the change in event numbers for every olympics
+#
+sportTotals <- function(){
+Summer <- events %>% 
+  filter (Season == "Summer" & Year > 1950)
 
+summerCounts <- Summer %>% 
+  group_by (Year,Sport) %>%
+  count(Sport) %>% 
+  arrange(Year, desc(n)) %>%
+  pivot_wider(values_from = n, names_from = Sport)
+
+summerCounts <- rotate_df(summerCounts)
+#print.data.frame (summerCounts)
+
+#names(summerCounts)
+names(summerCounts) <- as.character(unlist(summerCounts[1,]))
+#names(summerCounts)
+
+summerCounts <- summerCounts[-1,]
+#head(summerCounts)
+
+summerCounts <- tibble::rownames_to_column(summerCounts, "Sport")
+plsummerCounts <- head(summerCounts,16) %>% 
+  pivot_longer(!Sport, names_to = "year", values_to = "count")
+
+ggplot(plsummerCounts, aes(x = year, y = count)) + 
+  geom_line(aes(color = Sport, group = Sport)) +
+  facet_wrap(~Sport)
+}
