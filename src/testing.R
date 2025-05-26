@@ -4,6 +4,7 @@ library(tidyverse)
 library(sjmisc)
 athletes <- read.csv('./data/athlete_events_data_dictionary.csv', header = TRUE)
 events <- read.csv('./data/athlete_events.csv', header = TRUE)
+<<<<<<< HEAD
 countryDefdd<- read.csv('./data/country_definitions_data_dictionary.csv', header = TRUE)
 countryDef <- read.csv('./data/country_definitions.csv', header = TRUE)
 events$Medal <- factor(events$Medal,
@@ -14,6 +15,11 @@ head(athletes,10)
 head(events,10)
 head(countryDef, 10)
 head(countryDefdd,10)
+=======
+countryDefdd<- read.csv('./data/country_definitions_data_dictionary.csv',header = TRUE)
+countryDef <- read.csv('./data/country_definitions.csv',header = TRUE)
+head(athletes,15)
+>>>>>>> 60d682d366016c0df7f0ec924e35beeac747fe05
 
 #This one tells you how many medals each person won
 #This is important because there are athletes that win multiple medals
@@ -140,6 +146,7 @@ summerCounts2 <- Summer %>%  filter(Team == "Australia" | Team == "United States
 ggplot(summerCounts2, aes(x = Year, y = n)) + 
   geom_line(aes(color = Team, linetype = Team)) +
   facet_grid(vars(Sport)) + theme(legend.position="none")
+<<<<<<< HEAD
 
 
 Gold <- events %>% 
@@ -156,3 +163,5 @@ Silver1 <- events %>%
   pivot_wider(names_from = Medal, values_from = Medals_Given)
 
 
+=======
+>>>>>>> 60d682d366016c0df7f0ec924e35beeac747fe05

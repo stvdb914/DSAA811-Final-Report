@@ -15,12 +15,29 @@ header-includes:
   - \newcommand{\elandscape}{\end{landscape}}
 ---
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 60d682d366016c0df7f0ec924e35beeac747fe05
 ```{r child = 'src/00_loader.Rmd', Include = TRUE, eval = FALSE}
 ```
 
 When loading in the data I have determined from the events table, the variables ID, Team, NOC, Season, Sport, and Medals are all factor variables and needed to be coded this way in R. These are the variables that the investigation is centered around.
 
+<<<<<<< HEAD
 Every line in the data set represents an event. It contains all the athlete competitors if they win or not. Therefor to get quantifiable data I need to use counts to gather a lot of my numerical data. 
+=======
+```{r Load, echo = TRUE, eval = FALSE}
+#Read in the 4 csv files
+athletes <- read.csv('./data/athlete_events_data_dictionary.csv', 
+                     header = TRUE)
+events <- read.csv('./data/athlete_events.csv', 
+                   header = TRUE)
+countryDefdd<- read.csv('./data/country_definitions_data_dictionary.csv',
+                        header = TRUE)
+countryDef <- read.csv('./data/country_definitions.csv',
+                       header = TRUE)
+>>>>>>> 60d682d366016c0df7f0ec924e35beeac747fe05
 
 Looking into *1) Have the events of the Olympics stayed the same? What way are they different today as apposed to the inception date?* I begin with a specific year of an Olympic games. Table \@ref(tab:SummerWinners) takes a look at the number of medals available for the inception data of the summer Olympics in 1896 as apposed to the last summer games in the data set of 2016. On the left side we can see that there are only 9 sports, and 143 medals. This is correct to the reported data mentioned in [@a2020_olympic]. On the right side we can see that in 2016 there are now a lot more sports on offer, over 30 types. Interestingly all the sports that existed in the summer games in 1896 are still being represented in the Summer Olympic Games in 2016.
 

@@ -1,10 +1,15 @@
 ---
 title: 'Assignment 3 - Final Report'
 subtitle: 'Setting the environment'
+<<<<<<< HEAD
 author: 
   - Sharon Van Den Berg 9251936 (stvdb914@uowmail.edu.au) 
   - School of Mathematics and Applied Statistics
 date: "`r format(Sys.time(), '%d %B, %Y \n')`"
+=======
+author: "Sharon Van Den Berg"
+date: "2025-03-24"
+>>>>>>> 60d682d366016c0df7f0ec924e35beeac747fe05
 knit: (function(input, encoding) {
   rmarkdown::render(input,
                     encoding = "UTF-8",
@@ -13,19 +18,36 @@ knit: (function(input, encoding) {
                     knit_root_dir = rprojroot::find_rstudio_root_file())})
 output: 
   #html_document:
+<<<<<<< HEAD
   bookdown::pdf_document2: 
      keep_tex: true
      number_sections: true
      toc: false
+=======
+  bookdown::pdf_document2:
+    latex_engine: lualatex
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  includes:
+      #in_header: 00_Globals.sty
+      #before_body: 00_Title.sty
+      #after_body: tail.sty
+      toc: yes
+      keep_tex: yes
+      number_sections: yes
+>>>>>>> 60d682d366016c0df7f0ec924e35beeac747fe05
 geometry: margin= 2.00cm
 font-size: 11pt
 font-style: "Serif"
 line-spacing: 1.5
 header-includes:
+<<<<<<< HEAD
   - \usepackage{titling}
   - \pretitle{\begin{center}
     \includegraphics[width=6in,height=5in]{../images/UOW.png}\LARGE\\}
   - \posttitle{\end{center}}
+=======
+>>>>>>> 60d682d366016c0df7f0ec924e35beeac747fe05
   - \usepackage{setspace}
   - \onehalfspacing
   - \usepackage{fancyhdr}
@@ -39,7 +61,10 @@ header-includes:
   - \usepackage{pdflscape}
   - \newcommand{\blandscape}{\begin{landscape}}
   - \newcommand{\elandscape}{\end{landscape}}
+<<<<<<< HEAD
 documentclass: article
+=======
+>>>>>>> 60d682d366016c0df7f0ec924e35beeac747fe05
 editor_options: 
   chunk_output_type: console
 bibliography: DSAA811.bib
@@ -47,6 +72,7 @@ link-citations: TRUE
 citation_package: apa-annotated.csl
 ---
 
+<<<<<<< HEAD
 **DECLARATION**
 	No part of this Assignment has been copied from anyone else, and I have not lent any part of it to anyone else. No part of this assignment has been written by generative AI.
 
@@ -66,6 +92,10 @@ citation_package: apa-annotated.csl
 
 [This report was made using R Markdown as a project linking to my Git account](https://github.com/stvdb914/DSAA811-Final-Report "Git Repository")
 
+=======
+[This report was made using R Markdown as a project linking to my Git account](https://github.com/stvdb914/DSAA811-Preliminary-Report "Git Repository")
+	
+>>>>>>> 60d682d366016c0df7f0ec924e35beeac747fe05
 ```{r child = 'src/00_loader.Rmd' , eval = TRUE}
 ```
 
@@ -74,10 +104,14 @@ citation_package: apa-annotated.csl
 ```{r child = 'src/01_Abstract.Rmd'}
 ```
 
+<<<<<<< HEAD
 \newpage
 \tableofcontents
 
 # Glossary {-}
+=======
+# Glossary
+>>>>>>> 60d682d366016c0df7f0ec924e35beeac747fe05
 ```{r Glossary, include = TRUE, echo = FALSE}
   options(knitr.kable.NA = '')
 
@@ -86,10 +120,27 @@ citation_package: apa-annotated.csl
                  booktabs = TRUE) %>% 
     kable_styling(latex_options = "striped", position = "left") %>% 
       column_spec(1, bold = TRUE)
+<<<<<<< HEAD
 ```
 
 \newpage
 # Introduction {-}
+=======
+
+  
+```
+
+
+```{=tex}
+  %Display the table of contents and bypass the R commands to do this
+  \newpage
+  \tableofcontents
+  \newpage
+```
+
+
+# Introduction
+>>>>>>> 60d682d366016c0df7f0ec924e35beeac747fe05
 
 ```{r child = 'src/02_Introduction.Rmd'}
 ```
